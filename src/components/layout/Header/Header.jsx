@@ -1,7 +1,122 @@
-import React from "react";
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+
+import { Input } from "@/components/ui/input";
+
+import { Search, User, Settings, LogOut, Bell } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 function Header() {
-  return <div>Header</div>;
+  return (
+    <header className="pb-4">
+      <div className="flex items-center justify-between">
+        {/* SEARCH */}
+        <div className="relative w-96">
+          <Search
+            className="
+              absolute left-3 top-1/2
+              size-4 -translate-y-1/2
+              text-slate-400
+              z-10
+            "
+          />
+          <Input
+            placeholder="Search..."
+            className="pl-10 glass-strong border border-white/10 text-white placeholder:text-slate-500 shadow-purple"
+          />
+        </div>
+        {/* RIGHT SIDE */}
+        <div className="flex items-center gap-4">
+          {/* NOTIFICATION */}
+          <Button
+            size="lg"
+            className="btn btn-primary py-5 px-3 glass-strong border border-white/10 shadow-purple cursor-pointer rounded-xl"
+          >
+            <Bell className="size-5" />
+          </Button>
+          {/* PROFILE DROPDOWN */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="cursor-pointer outline-none">
+                <Avatar
+                  size="lg"
+                  className="glass-strong border border-white/10 shadow-purple transition-all duration-300 hover:scale-105"
+                >
+                  <AvatarImage src="https://i.pravatar.cc/150?img=11" />
+                  <AvatarFallback>IQ</AvatarFallback>
+                  <AvatarBadge className="bg-emerald-500" />
+                </Avatar>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="w-64 glass-strong border border-white/10"
+            >
+              {/* USER INFO */}
+              <DropdownMenuLabel className="py-3">
+                <div className="flex items-center gap-3">
+                  <Avatar>
+                    <AvatarImage src="https://i.pravatar.cc/150?img=11" />
+                    <AvatarFallback>IQ</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h4 className="text-sm font-semibold text-white">
+                      Ibrohim
+                    </h4>
+                    <p className="text-xs text-slate-400">Frontend Developer</p>
+                  </div>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                asChild
+                className="h-10 cursor-pointer hover:bg-primary/50"
+              >
+                <NavLink to="/profile">
+                  <User className="size-4" />
+                  Profile
+                </NavLink>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                asChild
+                className="h-10 cursor-pointer hover:bg-primary/50"
+              >
+                <NavLink to="/settings">
+                  <Settings className="size-4" />
+                  Settings
+                </NavLink>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                asChild
+                variant="destructive"
+                className="h-10 cursor-pointer hover:bg-destructive/50"
+              >
+                <NavLink to="/logout">
+                  <LogOut className="size-4" />
+                  Logout
+                </NavLink>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
+    </header>
+  );
 }
 
 export default Header;
