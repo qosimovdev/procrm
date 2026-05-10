@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+/* =========================================================
+   ROOT VARIABLES
+========================================================= */
+
+:root {
+  /* COLORS */
+  --bg-primary: #060816;
+  --bg-secondary: #0b1020;
+  --bg-tertiary: #111827;
+  /* --bg-card: rgba(255, 255, 255, 0.06); */
+  --bg-card: rgba(15, 23, 42, 0.72);
+  --card-border: rgba(238, 10, 10, 0.06);
+
+  --purple: #8b5cf6;
+  --purple-light: #a855f7;
+  --blue: #6366f1;
+
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --border: rgba(255, 255, 255, 0.08);
+
+  /* STATUS */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  /* GRADIENTS */
+  /* --gradient-primary: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #6366f1 50%,
+    #312e81 100%
+  ); */
+  --gradient-primary: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #6366f1 50%,
+    #312e81 100%
+  );
+
+  /* --gradient-dark: linear-gradient(180deg, #0f172a 0%, #020617 100%); */
+  --gradient-dark: linear-gradient(180deg, #0b1020 0%, #050816 100%);
+
+  --bg-glow-bottom: radial-gradient(
+    circle at bottom right,
+    rgba(158, 85, 147, 0.15),
+    transparent 65%
+  );
+  --bg-glow-top: radial-gradient(
+    circle at top left,
+    rgba(79, 70, 229, 0.1),
+    transparent 60%
+  );
+
+  /* GLASS */
+  /* --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.1); */
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-strong: rgba(255, 255, 255, 0.08);
+
+  /* SHADOWS */
+  /* --shadow-purple: 0 0 30px rgba(139, 92, 246, 0.35);
+  --shadow-card: 0 10px 40px rgba(2, 6, 23, 0.45); */
+
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-purple: 0 0 40px rgba(139, 92, 246, 0.25);
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.25);
+  /* FONT */
+  --font-main: "Inter", sans-serif;
+}
+
+/* =========================================================
+   TAILWIND TOKENS
+========================================================= */
+
+@theme {
+  --color-bg: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-card: var(--bg-card);
+
+  --color-primary: var(--purple);
+  --color-primary-light: var(--purple-light);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-border: var(--border);
+  --color-card-border: var(--card-border);
+
+  --font-sans: var(--font-main);
+}
+
+/* =========================================================
+   BASE
+========================================================= */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-bg-secondary text-text-primary font-sans;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* =========================================================
+   COMPONENTS
+========================================================= */
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center
+           h-12 px-6 rounded-xl
+           font-semibold transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center
+           h-12 px-6 rounded-xl
+           font-semibold transition-all duration-300
+           text-text-primary cursor-pointer;
+
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-purple);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+  }
+
+  .input {
+    @apply w-full h-12 px-4 rounded-xl
+           text-white border border-white/10
+           outline-none transition-all duration-300;
+
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+  }
+
+  .input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+  }
+
+  .card {
+    @apply rounded-3xl glass-strong border border-card-border p-6;
+    backdrop-filter: blur(30px);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+@utility bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+
+@utility bg-gradient-dark {
+  background-image: var(--gradient-dark);
+}
+
+@utility bg-glow-bottom {
+  background: var(--bg-glow-bottom);
+  backdrop-filter: blur(30px);
+}
+
+@utility bg-glow-top {
+  background: var(--bg-glow-top);
+  backdrop-filter: blur(30px);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(135deg, #8b5cf6, #6366f1);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--border);
+}
+
+@utility glass-strong {
+  background: var(--glass-strong);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--border);
+}
+
+@utility shadow-purple {
+  box-shadow: var(--shadow-purple);
+}
