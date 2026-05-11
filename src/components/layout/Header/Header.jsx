@@ -84,7 +84,7 @@ function Header() {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 asChild
-                className="h-10 cursor-pointer hover:bg-primary/50"
+                className="h-10 cursor-pointer text-text-secondary hover:bg-primary/50 hover:text-text-primary"
               >
                 <NavLink to="/profile">
                   <User className="size-4" />
@@ -93,7 +93,7 @@ function Header() {
               </DropdownMenuItem>
               <DropdownMenuItem
                 asChild
-                className="h-10 cursor-pointer hover:bg-primary/50"
+                className="h-10 cursor-pointer text-text-secondary hover:bg-primary/50 hover:text-text-primary"
               >
                 <NavLink to="/settings">
                   <Settings className="size-4" />
@@ -104,7 +104,7 @@ function Header() {
               <DropdownMenuItem
                 asChild
                 variant="destructive"
-                className="h-10 cursor-pointer hover:bg-destructive/50"
+                className="h-10 cursor-pointer hover:bg-destructive/50 text-destructive"
               >
                 <NavLink to="/logout">
                   <LogOut className="size-4" />

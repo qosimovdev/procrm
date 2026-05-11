@@ -19,6 +19,7 @@ function AvatarImage({ className, ...props }) {
   return (
     <AvatarPrimitive.Image
       data-slot="avatar-image"
+      alt={{ ...props }}
       className={cn(
         "aspect-square size-full rounded-full object-cover",
         className,

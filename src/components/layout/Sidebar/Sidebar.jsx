@@ -1,17 +1,29 @@
 import { NavLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  FolderKanban,
+  CheckSquare,
+  Users,
+  Settings,
+} from "lucide-react";
 
 function Sidebar() {
   const links = [
-    { name: "Dashboard", path: "/dashboard" },
-    { name: "Projects", path: "/projects" },
-    { name: "Tasks", path: "/tasks" },
-    { name: "Developers", path: "/developers" },
-    { name: "Settings", path: "/settings" },
+    { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
+    { name: "Projects", icon: FolderKanban, path: "/projects" },
+    { name: "Tasks", icon: CheckSquare, path: "/tasks" },
+    { name: "Developers", icon: Users, path: "/developers" },
+    { name: "Settings", icon: Settings, path: "/settings" },
   ];
 
   return (
     <aside className="w-66 min-h-full glass rounded-xl p-4 m-6 my-5 mr-0 shadow-purple">
-      <h1 className="text-gradient text-2xl font-bold mb-8">ProCRM</h1>
+      <h1 className="hidden md:block text-gradient text-2xl font-bold mb-8">
+        ProCRM
+      </h1>
+      <h1 className="block md:hidden text-gradient text-2xl font-bold mb-8">
+        PC
+      </h1>
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.path}>
@@ -29,7 +41,8 @@ function Sidebar() {
               `
               }
             >
-              {link.name}
+              <link.icon size={20} />
+              <span className="ml-3 hidden md:block">{link.name}</span>
             </NavLink>
           </li>
         ))}
