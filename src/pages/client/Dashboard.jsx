@@ -7,6 +7,8 @@ import {
   CardTitle,
   CardDescription,
 } from "../../components/ui/card";
+import { ChartAreaInteractive } from "../../components/ui/ChartAreaInteractive";
+import { PendingDeadlines } from "../../components/ui/DeadlineChart";
 
 function Dashboard() {
   const data = [
@@ -36,7 +38,7 @@ function Dashboard() {
     },
     {
       title: "Pending Deadlines",
-      count: 3,
+      count: 6,
       action: "View Deadlines",
       icon: Clock3,
       route: "/dashboard/pending-deadlines",
@@ -54,7 +56,7 @@ function Dashboard() {
           Welcome back, manage your projects efficiently.
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {data.map((item, index) => {
           const Icon = item.icon;
           return (
@@ -73,7 +75,6 @@ function Dashboard() {
                     {item.count}
                   </CardDescription>
                 </div>
-
                 <div
                   className={`
                     w-12 h-12 rounded-xl
@@ -95,6 +96,15 @@ function Dashboard() {
             </Card>
           );
         })}
+      </div>
+
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3 my-5 mt-6">
+        <div className=" lg:col-span-2 ">
+          <ChartAreaInteractive />
+        </div>
+        <div className="lg:col-span-1">
+          <PendingDeadlines />
+        </div>
       </div>
     </section>
   );

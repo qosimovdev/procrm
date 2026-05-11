@@ -3,6 +3,33 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
 
+.main {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8b5cf6, #3b82f6);
+  border-radius: 10px;
+}
+.main {
+  scrollbar-width: thin;
+  scrollbar-color: #8b5cf6 rgba(255, 255, 255, 0.03);
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
