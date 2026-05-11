@@ -77,7 +77,7 @@ export function PendingDeadlines() {
     .sort((a, b) => a.daysLeft - b.daysLeft);
 
   return (
-    <Card className="glass max-h-[415px] rounded-xl shadow-purple">
+    <Card className="glass rounded-xl shadow-purple">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-semibold text-text-primary">
