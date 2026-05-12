@@ -25,18 +25,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const chartData = [
-  { date: "2026-04-01", completed: 10, inProgress: 5 },
-  { date: "2026-04-02", completed: 15, inProgress: 7 },
-  { date: "2026-04-03", completed: 18, inProgress: 6 },
-  { date: "2026-04-04", completed: 22, inProgress: 8 },
-  { date: "2026-04-19", completed: 28, inProgress: 10 },
-  { date: "2026-04-20", completed: 30, inProgress: 12 },
-  { date: "2026-04-21", completed: 35, inProgress: 9 },
-  { date: "2026-04-22", completed: 40, inProgress: 11 },
-  { date: "2026-05-08", completed: 48, inProgress: 14 },
-];
-
 const chartConfig = {
   completed: {
     label: "Completed Tasks",
@@ -48,7 +36,7 @@ const chartConfig = {
   },
 };
 
-export function ChartAreaInteractive() {
+export function ChartAreaInteractive({ chartData }) {
   const [timeRange, setTimeRange] = useState("90d");
 
   const filteredData = chartData.filter((item) => {

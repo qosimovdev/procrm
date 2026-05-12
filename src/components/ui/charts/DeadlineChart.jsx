@@ -7,26 +7,7 @@ import {
   CalendarDays,
 } from "lucide-react";
 
-export function PendingDeadlines() {
-  const deadlines = [
-    {
-      title: "CRM API Integration",
-      dueDate: "2026-05-12",
-    },
-    {
-      title: "Dashboard UI",
-      dueDate: "2026-05-12",
-    },
-    {
-      title: "Mobile Responsive Fix",
-      dueDate: "2026-05-13",
-    },
-    {
-      title: "Auth System",
-      dueDate: "2026-05-25",
-    },
-  ];
-
+export function PendingDeadlines({ deadlines }) {
   const normalizeDate = (date) => {
     const normalized = new Date(date);
     normalized.setHours(0, 0, 0, 0);
@@ -97,12 +78,12 @@ export function PendingDeadlines() {
 
       <CardContent className="space-y-3 overflow-y-auto h-80 ">
         {processedTasks.length > 0 ? (
-          processedTasks.map((task) => {
+          processedTasks.map((task, index) => {
             const StatusIcon = task.status.icon;
             const IconColor = task.status.iconColor;
             return (
               <div
-                key={task.id}
+                key={index}
                 className="
                   group
                   flex items-center justify-between
