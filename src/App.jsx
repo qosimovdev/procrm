@@ -6,7 +6,6 @@ function App() {
   return (
     <>
       <div className="relative flex min-h-screen bg-bg overflow-hidden">
-        {/* Glow Background */}
         <div className="absolute inset-0 bg-glow-bottom pointer-events-none" />
         <div className="absolute inset-0 bg-glow-top pointer-events-none" />
         <Sidebar />
