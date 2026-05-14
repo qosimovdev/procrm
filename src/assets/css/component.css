@@ -154,11 +154,13 @@
     background: var(--glass-bg);
     backdrop-filter: blur(30px);
     border: 2px solid var(--my-border);
+    border-radius: 12px;
   }
   .glass-strong {
     background: var(--glass-strong);
     backdrop-filter: blur(30px);
     border: 2px solid var(--my-border);
+    border-radius: 12px;
   }
   .shadow-purple {
     box-shadow: var(--shadow-purple);

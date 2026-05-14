@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 const Dashboard = lazy(() => import("../pages/client/Dashboard/Dashboard"));
-const Projects = lazy(() => import("../pages/client/Projects"));
+const Projects = lazy(() => import("../pages/client/Projects/Projects"));
 const Tasks = lazy(() => import("../pages/client/Tasks"));
 const Developers = lazy(() => import("../pages/client/Developers"));
 const Setting = lazy(() => import("../pages/client/Setting"));

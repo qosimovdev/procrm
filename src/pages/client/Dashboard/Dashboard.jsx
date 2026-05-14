@@ -219,24 +219,26 @@ function Dashboard() {
       </div>
       <div>
         <Card className="glass shadow-purple rounded-xl p-4 py-5">
-          <CardTitle className="text-2xl text-text-primary ">
-            Task Overview
-          </CardTitle>
-          <TableActions tasks={currentTasks} />
-          <div className="flex items-center justify-between my-2">
-            <div>
-              <CardTitle className="hidden text-sm text-text-secondary font-medium ">
-                Showing 1 to 5 of 25 tasks
-              </CardTitle>
-            </div>
-            <div>
-              <PaginationDemo
-                page={page}
-                setPage={setPage}
-                totalPages={totalPages}
-              />
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-2xl text-text-primary ">
+              Task Overview
+            </CardTitle>
+            <div className="flex items-center justify-between my-2">
+              <div>
+                <CardTitle className="hidden text-sm text-text-secondary font-medium ">
+                  Showing 1 to 5 of 25 tasks
+                </CardTitle>
+              </div>
+              <div>
+                <PaginationDemo
+                  page={page}
+                  setPage={setPage}
+                  totalPages={totalPages}
+                />
+              </div>
             </div>
           </div>
+          <TableActions tasks={currentTasks} />
         </Card>
       </div>
     </section>
