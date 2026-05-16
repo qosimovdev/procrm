@@ -22,7 +22,7 @@ import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
-    <header className="sticky top-0 z-10 p-3 glass-strong rounded-xl shadow-purple ">
+    <header className="sticky top-1 z-10 p-3 glass-strong rounded-xl shadow-purple ">
       <div className="flex items-center justify-between">
         {/* SEARCH */}
         <div className="relative w-96">

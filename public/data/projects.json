@@ -1,214 +1,443 @@
 [
     {
         "id": 1,
-        "projectName": "Project Alpha",
-        "client": "Acme Corp",
-        "description": "A cutting-edge project management tool.",
-        "status": "In Progress",
-        "priority": "High",
-        "progress": 68,
-        "budget": 45000,
-        "spent": 29000,
-        "startDate": "2026-10-01",
-        "deadline": "2026-12-31",
-        "tags": [
-            "React",
-            "Node.js",
-            "UI/UX"
-        ],
-        "teamMembers": [
-            {
-                "id": 1,
-                "name": "Alice Johnson",
-                "role": "Project Manager",
-                "avatar": "/avatars/alice.png"
-            },
-            {
-                "id": 2,
-                "name": "Bob Smith",
-                "role": "Developer",
-                "avatar": "/avatars/bob.png"
-            }
-        ],
-        "tasks": [
-            {
-                "name": "Design Landing Page",
-                "description": "Create responsive landing page UI",
-                "assignee": "Charlie Brown",
-                "status": "In Progress",
-                "priority": "Medium",
-                "progress": 60,
-                "dueDate": "2026-11-30",
-                "comments": 12,
-                "attachments": 4
-            }
-        ],
-        "activity": [
-            {
-                "id": 1,
-                "user": "Alice Johnson",
-                "action": "Updated project status",
-                "time": "2 hours ago"
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "projectName": "Project Beta",
-        "client": "Acme Corp",
-        "description": "A cutting-edge project management tool.",
-        "status": "Planning",
-        "priority": "High",
-        "progress": 8,
-        "budget": 45000,
-        "spent": 29000,
-        "startDate": "2026-10-01",
-        "deadline": "2026-12-31",
-        "tags": [
-            "React",
-            "Node.js",
-            "UI/UX"
-        ],
-        "teamMembers": [
-            {
-                "id": 1,
-                "name": "Alice Johnson",
-                "role": "Project Manager",
-                "avatar": "/avatars/alice.png"
-            },
-            {
-                "id": 2,
-                "name": "Bob Smith",
-                "role": "Developer",
-                "avatar": "/avatars/bob.png"
-            }
-        ],
-        "tasks": [
-            {
-                "name": "Design Landing Page",
-                "description": "Create responsive landing page UI",
-                "assignee": "Charlie Brown",
-                "status": "In Progress",
-                "priority": "Medium",
-                "progress": 60,
-                "dueDate": "2026-11-30",
-                "comments": 12,
-                "attachments": 4
-            }
-        ],
-        "activity": [
-            {
-                "id": 1,
-                "user": "Alice Johnson",
-                "action": "Updated project status",
-                "time": "2 hours ago"
-            }
-        ]
-    },
-    {
-        "id": 3,
-        "projectName": "Nova CRM System",
+        "projectName": "Nova CRM",
         "client": "TechVision LLC",
-        "description": "Modern CRM platform for managing sales and customer relationships.",
-        "status": "In Progress",
-        "priority": "Medium",
-        "progress": 56,
-        "budget": 78000,
-        "spent": 42000,
-        "startDate": "2026-09-15",
-        "deadline": "2027-01-20",
-        "tags": [
-            "Vue.js",
-            "Laravel",
-            "TailwindCSS"
-        ],
-        "teamMembers": [
-            {
-                "id": 3,
-                "name": "Emma Wilson",
-                "role": "UI/UX Designer",
-                "avatar": "/avatars/emma.png"
-            },
-            {
-                "id": 4,
-                "name": "Daniel Lee",
-                "role": "Backend Developer",
-                "avatar": "/avatars/daniel.png"
-            }
-        ],
-        "tasks": [
-            {
-                "name": "CRM Dashboard",
-                "description": "Develop analytics dashboard with charts",
-                "assignee": "Emma Wilson",
-                "status": "Review",
-                "priority": "High",
-                "progress": 85,
-                "dueDate": "2026-12-05",
-                "comments": 18,
-                "attachments": 6
-            }
-        ],
-        "activity": [
-            {
-                "id": 2,
-                "user": "Daniel Lee",
-                "action": "Completed API integration",
-                "time": "5 hours ago"
-            }
-        ]
-    },
-    {
-        "id": 4,
-        "projectName": "E-Commerce Platform",
-        "client": "Global Store",
-        "description": "Scalable online shopping platform with payment integration.",
+        "description": "Modern CRM platform for enterprise teams.",
         "status": "In Progress",
         "priority": "High",
         "progress": 72,
+        "budget": 85000,
+        "spent": 56000,
+        "startDate": "2026-09-10",
+        "deadline": "2027-01-25",
+        "tags": [
+            "React",
+            "Node.js",
+            "MongoDB"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 18,
+        "tasksCompleted": 13,
+        "activity": []
+    },
+    {
+        "id": 2,
+        "projectName": "E-Commerce Platform",
+        "client": "Global Store",
+        "description": "Scalable shopping platform.",
+        "status": "Testing",
+        "priority": "Critical",
+        "progress": 89,
         "budget": 120000,
-        "spent": 86000,
-        "startDate": "2026-08-10",
+        "spent": 98000,
+        "startDate": "2026-08-01",
         "deadline": "2027-02-15",
         "tags": [
             "Next.js",
-            "Stripe",
-            "MongoDB"
+            "Stripe"
         ],
-        "teamMembers": [
-            {
-                "id": 5,
-                "name": "Sophia Martinez",
-                "role": "Frontend Developer",
-                "avatar": "/avatars/sophia.png"
-            },
-            {
-                "id": 6,
-                "name": "James Anderson",
-                "role": "DevOps Engineer",
-                "avatar": "/avatars/james.png"
-            }
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 24,
+        "tasksCompleted": 21,
+        "activity": []
+    },
+    {
+        "id": 3,
+        "projectName": "Finance Dashboard",
+        "client": "FinCore Bank",
+        "description": "Analytics dashboard.",
+        "status": "Planning",
+        "priority": "Medium",
+        "progress": 15,
+        "budget": 65000,
+        "spent": 12000,
+        "startDate": "2026-11-01",
+        "deadline": "2027-03-30",
+        "tags": [
+            "Vue",
+            "Laravel"
         ],
-        "tasks": [
-            {
-                "name": "Payment Gateway Integration",
-                "description": "Integrate Stripe payment system",
-                "assignee": "James Anderson",
-                "status": "In Progress",
-                "priority": "Critical",
-                "progress": 70,
-                "dueDate": "2026-12-18",
-                "comments": 24,
-                "attachments": 8
-            }
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 12,
+        "tasksCompleted": 2,
+        "activity": []
+    },
+    {
+        "id": 4,
+        "projectName": "AI Chat Assistant",
+        "client": "OpenTech",
+        "description": "AI-powered support chatbot.",
+        "status": "In Progress",
+        "priority": "High",
+        "progress": 63,
+        "budget": 98000,
+        "spent": 61000,
+        "startDate": "2026-07-12",
+        "deadline": "2026-12-28",
+        "tags": [
+            "Python",
+            "FastAPI"
         ],
-        "activity": [
-            {
-                "id": 3,
-                "user": "Sophia Martinez",
-                "action": "Updated frontend components",
-                "time": "1 day ago"
-            }
-        ]
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 20,
+        "tasksCompleted": 11,
+        "activity": []
+    },
+    {
+        "id": 5,
+        "projectName": "Healthcare Portal",
+        "client": "MediCare Plus",
+        "description": "Patient management system.",
+        "status": "Under Review",
+        "priority": "High",
+        "progress": 77,
+        "budget": 140000,
+        "spent": 101000,
+        "startDate": "2026-06-15",
+        "deadline": "2027-01-10",
+        "tags": [
+            "Angular",
+            "Firebase"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 30,
+        "tasksCompleted": 23,
+        "activity": []
+    },
+    {
+        "id": 6,
+        "projectName": "TaskFlow",
+        "client": "Productive Inc",
+        "description": "Team productivity platform.",
+        "status": "Completed",
+        "priority": "Medium",
+        "progress": 100,
+        "budget": 54000,
+        "spent": 52000,
+        "startDate": "2026-03-10",
+        "deadline": "2026-09-20",
+        "tags": [
+            "React",
+            "Express"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 16,
+        "tasksCompleted": 16,
+        "activity": []
+    },
+    {
+        "id": 7,
+        "projectName": "Travel Booking App",
+        "client": "FlyAway",
+        "description": "Reservation platform.",
+        "status": "Blocked",
+        "priority": "Critical",
+        "progress": 48,
+        "budget": 92000,
+        "spent": 47000,
+        "startDate": "2026-09-18",
+        "deadline": "2027-04-15",
+        "tags": [
+            "React Native",
+            "Node.js"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 22,
+        "tasksCompleted": 10,
+        "activity": []
+    },
+    {
+        "id": 8,
+        "projectName": "EduLearn LMS",
+        "client": "Bright Future Academy",
+        "description": "Online learning platform.",
+        "status": "On Hold",
+        "priority": "Low",
+        "progress": 33,
+        "budget": 71000,
+        "spent": 25000,
+        "startDate": "2026-10-20",
+        "deadline": "2027-05-01",
+        "tags": [
+            "Next.js",
+            "Prisma"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 14,
+        "tasksCompleted": 5,
+        "activity": []
+    },
+    {
+        "id": 9,
+        "projectName": "Inventory System",
+        "client": "Warehouse Pro",
+        "description": "Warehouse management software.",
+        "status": "In Progress",
+        "priority": "Medium",
+        "progress": 58,
+        "budget": 68000,
+        "spent": 39000,
+        "startDate": "2026-08-05",
+        "deadline": "2027-01-18",
+        "tags": [
+            "Vue",
+            "Firebase"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 17,
+        "tasksCompleted": 9,
+        "activity": []
+    },
+    {
+        "id": 10,
+        "projectName": "Restaurant POS",
+        "client": "FoodPoint",
+        "description": "POS management system.",
+        "status": "Completed",
+        "priority": "Medium",
+        "progress": 100,
+        "budget": 43000,
+        "spent": 41000,
+        "startDate": "2026-02-01",
+        "deadline": "2026-07-10",
+        "tags": [
+            "Electron",
+            "SQLite"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 11,
+        "tasksCompleted": 11,
+        "activity": []
+    },
+    {
+        "id": 11,
+        "projectName": "Crypto Exchange",
+        "client": "BlockWave",
+        "description": "Crypto trading platform.",
+        "status": "In Progress",
+        "priority": "Critical",
+        "progress": 69,
+        "budget": 210000,
+        "spent": 154000,
+        "startDate": "2026-05-15",
+        "deadline": "2027-03-01",
+        "tags": [
+            "Blockchain",
+            "React"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 35,
+        "tasksCompleted": 24,
+        "activity": []
+    },
+    {
+        "id": 12,
+        "projectName": "Fitness Tracker",
+        "client": "FitLife",
+        "description": "Fitness mobile app.",
+        "status": "Testing",
+        "priority": "Medium",
+        "progress": 82,
+        "budget": 59000,
+        "spent": 48000,
+        "startDate": "2026-07-01",
+        "deadline": "2026-12-20",
+        "tags": [
+            "Flutter",
+            "Firebase"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 19,
+        "tasksCompleted": 15,
+        "activity": []
+    },
+    {
+        "id": 13,
+        "projectName": "Streaming Platform",
+        "client": "VisionStream",
+        "description": "Video streaming service.",
+        "status": "Planning",
+        "priority": "High",
+        "progress": 12,
+        "budget": 180000,
+        "spent": 21000,
+        "startDate": "2026-11-10",
+        "deadline": "2027-07-30",
+        "tags": [
+            "AWS",
+            "Redis"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 28,
+        "tasksCompleted": 3,
+        "activity": []
+    },
+    {
+        "id": 14,
+        "projectName": "Smart Home App",
+        "client": "HomeSync",
+        "description": "IoT smart home dashboard.",
+        "status": "In Progress",
+        "priority": "Medium",
+        "progress": 51,
+        "budget": 73000,
+        "spent": 34000,
+        "startDate": "2026-09-05",
+        "deadline": "2027-02-14",
+        "tags": [
+            "IoT",
+            "React Native"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 15,
+        "tasksCompleted": 7,
+        "activity": []
+    },
+    {
+        "id": 15,
+        "projectName": "Legal Management System",
+        "client": "LawBridge",
+        "description": "Legal case management.",
+        "status": "Under Review",
+        "priority": "High",
+        "progress": 74,
+        "budget": 99000,
+        "spent": 72000,
+        "startDate": "2026-06-20",
+        "deadline": "2027-01-05",
+        "tags": [
+            "Angular",
+            "NestJS"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 23,
+        "tasksCompleted": 18,
+        "activity": []
+    },
+    {
+        "id": 16,
+        "projectName": "Event Booking System",
+        "client": "Eventify",
+        "description": "Event reservation platform.",
+        "status": "Completed",
+        "priority": "Low",
+        "progress": 100,
+        "budget": 46000,
+        "spent": 43000,
+        "startDate": "2026-01-12",
+        "deadline": "2026-06-30",
+        "tags": [
+            "Vue",
+            "Stripe"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 10,
+        "tasksCompleted": 10,
+        "activity": []
+    },
+    {
+        "id": 17,
+        "projectName": "Construction ERP",
+        "client": "BuildMaster",
+        "description": "ERP for construction companies.",
+        "status": "Blocked",
+        "priority": "Critical",
+        "progress": 39,
+        "budget": 250000,
+        "spent": 92000,
+        "startDate": "2026-08-15",
+        "deadline": "2027-08-01",
+        "tags": [
+            "Java",
+            "SAP"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 42,
+        "tasksCompleted": 16,
+        "activity": []
+    },
+    {
+        "id": 18,
+        "projectName": "Music Streaming App",
+        "client": "SoundWave",
+        "description": "Cross-platform music app.",
+        "status": "On Hold",
+        "priority": "Medium",
+        "progress": 41,
+        "budget": 88000,
+        "spent": 37000,
+        "startDate": "2026-10-02",
+        "deadline": "2027-04-22",
+        "tags": [
+            "GraphQL",
+            "React Native"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 20,
+        "tasksCompleted": 8,
+        "activity": []
+    },
+    {
+        "id": 19,
+        "projectName": "HR Management System",
+        "client": "PeopleFirst",
+        "description": "Payroll and HR software.",
+        "status": "In Progress",
+        "priority": "High",
+        "progress": 66,
+        "budget": 102000,
+        "spent": 69000,
+        "startDate": "2026-07-20",
+        "deadline": "2027-02-18",
+        "tags": [
+            "Spring Boot",
+            "React"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 26,
+        "tasksCompleted": 17,
+        "activity": []
+    },
+    {
+        "id": 20,
+        "projectName": "Real Estate CRM",
+        "client": "EstatePro",
+        "description": "CRM for real estate agencies.",
+        "status": "Archived",
+        "priority": "Low",
+        "progress": 100,
+        "budget": 57000,
+        "spent": 56000,
+        "startDate": "2025-11-10",
+        "deadline": "2026-05-30",
+        "tags": [
+            "Laravel",
+            "MySQL"
+        ],
+        "teamMembers": [],
+        "tasks": [],
+        "totalTasks": 13,
+        "tasksCompleted": 13,
+        "activity": []
     }
 ]

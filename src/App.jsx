@@ -5,7 +5,7 @@ import Sidebar from "./components/layout/Sidebar/Sidebar";
 function App() {
   return (
     <>
-      <div className="relative flex min-h-screen bg-bg overflow-hidden">
+      <div className="relative flex min-h-screen bg-bg">
         <div className="absolute inset-0 bg-glow-bottom pointer-events-none" />
         <div className="absolute inset-0 bg-glow-top pointer-events-none" />
         <Sidebar />

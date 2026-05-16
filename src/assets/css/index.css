@@ -3,6 +3,9 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
 
+html {
+  scroll-behavior: smooth;
+}
 .main {
   overflow-y: auto;
   height: 100vh;
