@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,9 +8,12 @@ import {
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
+import ProgressLine, { ProgressCircle } from "@/components/ui/Progress";
 import { Plus } from "lucide-react";
-
+import { getProjects } from "../../../api/projects.service";
 function Projects() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const statusStyles = {
     "Not Started": "bg-gray-500/10 text-gray-400 border border-gray-500/20",
     Planning: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
@@ -22,206 +26,28 @@ function Projects() {
     Cancelled: "bg-red-500/10 text-red-400 border border-red-500/20",
     Archived: "bg-zinc-500/10 text-zinc-400 border border-zinc-500/20",
   };
-  const projectsData = [
-    {
-      id: 1,
-      projectName: "Project Alpha",
-      client: "Acme Corp",
-      description: "A cutting-edge project management tool.",
-      status: "In Progress",
-      priority: "High",
-      progress: 68,
-      budget: 45000,
-      spent: 29000,
-      startDate: "2026-10-01",
-      deadline: "2026-12-31",
-      tags: ["React", "Node.js", "UI/UX"],
-      teamMembers: [
-        {
-          id: 1,
-          name: "Alice Johnson",
-          role: "Project Manager",
-          avatar: "/avatars/alice.png",
-        },
-        {
-          id: 2,
-          name: "Bob Smith",
-          role: "Developer",
-          avatar: "/avatars/bob.png",
-        },
-      ],
-      tasks: [
-        {
-          name: "Design Landing Page",
-          description: "Create responsive landing page UI",
-          assignee: "Charlie Brown",
-          status: "In Progress",
-          priority: "Medium",
-          progress: 60,
-          dueDate: "2026-11-30",
-          comments: 12,
-          attachments: 4,
-        },
-      ],
-      activity: [
-        {
-          id: 1,
-          user: "Alice Johnson",
-          action: "Updated project status",
-          time: "2 hours ago",
-        },
-      ],
-    },
-    {
-      id: 1,
-      projectName: "Project Alpha",
-      client: "Acme Corp",
-      description: "A cutting-edge project management tool.",
-      status: "Planning",
-      priority: "High",
-      progress: 8,
-      budget: 45000,
-      spent: 29000,
-      startDate: "2026-10-01",
-      deadline: "2026-12-31",
-      tags: ["React", "Node.js", "UI/UX"],
-      teamMembers: [
-        {
-          id: 1,
-          name: "Alice Johnson",
-          role: "Project Manager",
-          avatar: "/avatars/alice.png",
-        },
-        {
-          id: 2,
-          name: "Bob Smith",
-          role: "Developer",
-          avatar: "/avatars/bob.png",
-        },
-      ],
-      tasks: [
-        {
-          name: "Design Landing Page",
-          description: "Create responsive landing page UI",
-          assignee: "Charlie Brown",
-          status: "In Progress",
-          priority: "Medium",
-          progress: 60,
-          dueDate: "2026-11-30",
-          comments: 12,
-          attachments: 4,
-        },
-      ],
-      activity: [
-        {
-          id: 1,
-          user: "Alice Johnson",
-          action: "Updated project status",
-          time: "2 hours ago",
-        },
-      ],
-    },
-    {
-      id: 2,
-      projectName: "Nova CRM System",
-      client: "TechVision LLC",
-      description:
-        "Modern CRM platform for managing sales and customer relationships.",
-      status: "In Progress",
-      priority: "Medium",
-      progress: 56,
-      budget: 78000,
-      spent: 42000,
-      startDate: "2026-09-15",
-      deadline: "2027-01-20",
-      tags: ["Vue.js", "Laravel", "TailwindCSS"],
-      teamMembers: [
-        {
-          id: 3,
-          name: "Emma Wilson",
-          role: "UI/UX Designer",
-          avatar: "/avatars/emma.png",
-        },
-        {
-          id: 4,
-          name: "Daniel Lee",
-          role: "Backend Developer",
-          avatar: "/avatars/daniel.png",
-        },
-      ],
-      tasks: [
-        {
-          name: "CRM Dashboard",
-          description: "Develop analytics dashboard with charts",
-          assignee: "Emma Wilson",
-          status: "Review",
-          priority: "High",
-          progress: 85,
-          dueDate: "2026-12-05",
-          comments: 18,
-          attachments: 6,
-        },
-      ],
-      activity: [
-        {
-          id: 2,
-          user: "Daniel Lee",
-          action: "Completed API integration",
-          time: "5 hours ago",
-        },
-      ],
-    },
-    {
-      id: 3,
-      projectName: "E-Commerce Platform",
-      client: "Global Store",
-      description:
-        "Scalable online shopping platform with payment integration.",
-      status: "Development",
-      priority: "High",
-      progress: 72,
-      budget: 120000,
-      spent: 86000,
-      startDate: "2026-08-10",
-      deadline: "2027-02-15",
-      tags: ["Next.js", "Stripe", "MongoDB"],
-      teamMembers: [
-        {
-          id: 5,
-          name: "Sophia Martinez",
-          role: "Frontend Developer",
-          avatar: "/avatars/sophia.png",
-        },
-        {
-          id: 6,
-          name: "James Anderson",
-          role: "DevOps Engineer",
-          avatar: "/avatars/james.png",
-        },
-      ],
-      tasks: [
-        {
-          name: "Payment Gateway Integration",
-          description: "Integrate Stripe payment system",
-          assignee: "James Anderson",
-          status: "In Progress",
-          priority: "Critical",
-          progress: 70,
-          dueDate: "2026-12-18",
-          comments: 24,
-          attachments: 8,
-        },
-      ],
-      activity: [
-        {
-          id: 3,
-          user: "Sophia Martinez",
-          action: "Updated frontend components",
-          time: "1 day ago",
-        },
-      ],
-    },
-  ];
+  const progressColors = {
+    Planning: "#a855f7",
+    "In Progress": "#3b82f6",
+    Completed: "#22c55e",
+    Testing: "#6366f1",
+    Blocked: "#f97316",
+  };
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const projects = await getProjects();
+        setProjects(projects);
+        console.log(projects);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+  if (loading) return <p className="text-4xl my-0 mx-auto">Loading Projects</p>;
   return (
     <section>
       <div className="flex items-center justify-between my-5">
@@ -238,29 +64,20 @@ function Projects() {
           <Plus className=" size-5" /> New Project
         </Button>
       </div>
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-4 my-5 mt-6">
-        {projectsData.map((project, index) => (
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 my-5 mt-6">
+        {projects.map((project, index) => (
           <Card
             key={index}
             className="w-full glass-strong hover:border-purple-500/30 transition-all text-primary shadow-purple"
           >
             <CardHeader className="flex items-start gap-5 ">
-              <div
-                className="relative w-24 h-24 rounded-full flex items-center justify-center"
-                style={{
-                  background: `conic-gradient(
-                  #8b5cf6 ${project.progress * 3.6}deg,
-                   rgba(255,255,255,0.08) 0deg
-                  )`,
-                }}
-              >
-                {/* Inner circle */}
-                <div className="w-20 h-20 rounded-full bg-[#0f172a] flex items-center justify-center">
-                  <h3 className="text-white font-semibold text-lg">
-                    {project.progress}%
-                  </h3>
-                </div>
-              </div>
+              {/* Progress Circle */}
+
+              <ProgressCircle
+                progress={project.progress}
+                bgColor={progressColors[project.status] || "#7F56D9"}
+              />
+
               <div>
                 <CardTitle className="text-xl text-text-primary">
                   {project.projectName}
@@ -312,19 +129,7 @@ function Projects() {
               </div>
 
               {/* Progress Bar */}
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span className="text-text-secondary">Progress</span>
-                  <span className="text-text-primary">{project.progress}%</span>
-                </div>
-
-                <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-primary rounded-full"
-                    style={{ width: `${project.progress}%` }}
-                  />
-                </div>
-              </div>
+              <ProgressLine progress={project.progress} />
 
               {/* Button */}
               <Button className="w-full btn-primary rounded-xl">
