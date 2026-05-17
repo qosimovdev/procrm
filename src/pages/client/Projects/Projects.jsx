@@ -13,10 +13,13 @@ import { Flag, Plus, SquareCheckIcon, CalendarDays } from "lucide-react";
 import { getProjects } from "../../../api/projects.service";
 import { AvatarGroups } from "@/components/layout/Avatar/AvatarGroup";
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
+import { AddProjectModal } from "@/components/projects/AddProjectModal";
+
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [addModalOpen, setAddModalOpen] = useState(false);
 
   const itemsPerPage = 8;
   const totalProjects = Math.ceil(projects.length / itemsPerPage);
@@ -96,7 +99,10 @@ function Projects() {
     };
     fetchProjects();
   }, []);
-  if (loading) return <p className="text-4xl my-0 mx-auto">Loading Projects</p>;
+  if (loading)
+    return (
+      <p className="text-4xl my-5 mx-2 text-text-primary">Loading Projects</p>
+    );
   return (
     <section>
       <div className="flex items-center justify-between my-5">
@@ -109,9 +115,11 @@ function Projects() {
         <Button
           variant="default"
           className="btn-primary py-6 px-2 text-lg rounded-xl"
+          onClick={() => setAddModalOpen(true)}
         >
           <Plus className=" size-5" /> New Project
         </Button>
+        <AddProjectModal open={addModalOpen} onOpenChange={setAddModalOpen} />
       </div>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 my-5 mt-6">
         {currentProject.map((project, index) => (
@@ -211,14 +219,14 @@ function Projects() {
           </Card>
         ))}
       </div>
-      <Card className="w-full glass-strong text-primary shadow-purple pl-3 pr-1 py-4">
+      <Card className="w-full sticky bottom-0 z-50 glass-strong text-primary shadow-purple pl-3 pr-1 py-4 ">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <p className="text-sm text-text-secondary">
             Showing {startIndex + 1} to{" "}
             {Math.min(startIndex + itemsPerPage, projects.length)} of{" "}
             {projects.length} projects
           </p>
-          <div>
+          <div className="">
             <PaginationDemo
               page={page}
               setPage={setPage}

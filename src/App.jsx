@@ -1,7 +1,7 @@
 import Header from "./components/layout/Header/Header";
 import AppRouter from "./routes/AppRouter";
 import Sidebar from "./components/layout/Sidebar/Sidebar";
-
+import { Toaster } from "sonner";
 function App() {
   return (
     <>
@@ -14,6 +14,21 @@ function App() {
           <AppRouter />
         </main>
       </div>
+      <Toaster
+        position="top-center"
+        expand
+        richColors
+        toastOptions={{
+          classNames: {
+            title: "text-white",
+            description: "text-slate-400",
+            success: "!text-text-success",
+            error: "!text-text-danger",
+            warning: "!text-text-warning",
+            info: "!text-text-primary",
+          },
+        }}
+      />
     </>
   );
 }

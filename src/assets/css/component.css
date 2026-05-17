@@ -76,6 +76,7 @@
 @layer base {
   * {
     @apply box-border m-0 p-0 border-border;
+    /* border: 2px solid red; */
   }
   body {
     @apply font-sans bg-bg;
@@ -133,9 +134,11 @@
 @layer utilities {
   .bg-gradient-primary {
     background-image: var(--gradient-primary);
+    border-radius: 12px;
   }
   .bg-gradient-dark {
     background-image: var(--gradient-dark);
+    border-radius: 12px;
   }
   .bg-glow-bottom {
     background: var(--bg-glow-bottom);
@@ -165,4 +168,23 @@
   .shadow-purple {
     box-shadow: var(--shadow-purple);
   }
+}
+
+/* Toast */
+[data-sonner-toast] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(18px);
+  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+  border-radius: 12px !important;
+}
+[data-sonner-toast] [data-title] {
+  color: white !important;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+[data-sonner-toast] [data-description] {
+  color: #94a3b8 !important;
 }
