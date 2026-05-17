@@ -15,7 +15,7 @@ function App() {
         </main>
       </div>
       <Toaster
-        position="top-center"
+        position="top-right"
         expand
         richColors
         toastOptions={{

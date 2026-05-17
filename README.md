@@ -50,4 +50,4 @@ Ibrohim Qosimov
 
 GitHub: https://github.com/qosimovdev  
 Email: qosimovdevv@gmail.com
-Telegram: @qosimovdev
+Telegram: [@qosimovdev](https://t.me/qosimovdev)

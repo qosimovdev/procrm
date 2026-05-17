@@ -1,3 +1,5 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createProject } from "@/api/projects.service";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,8 +21,22 @@ import { CustomSelect } from "./ProjectSelect";
 import { toast } from "sonner";
 
 export function AddProjectModal({ open, onOpenChange }) {
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutation({
+    mutationFn: createProject,
+    onSuccess: () => {
+      toast.success("Project created successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["projects"],
+      });
+      onOpenChange(false);
+      setFormData(initialState);
+    },
+    onError: () => {
+      toast.error("Failed to create project");
+    },
+  });
+  const initialState = {
     projectName: "",
     client: "",
     description: "",
@@ -36,7 +52,9 @@ export function AddProjectModal({ open, onOpenChange }) {
     tags: "",
     teamMembers: "",
     thumbnail: "",
-  });
+  };
+  const [formData, setFormData] = useState(initialState);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -59,8 +77,6 @@ export function AddProjectModal({ open, onOpenChange }) {
       toast.error("Client name is required");
       return;
     }
-    setLoading(true);
-
     const newProject = {
       id: Date.now(),
       ...formData,
@@ -70,14 +86,8 @@ export function AddProjectModal({ open, onOpenChange }) {
       deadline: formData.deadline
         ? format(formData.deadline, "yyyy-MM-dd")
         : "",
-      tags: formData.tags
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter(Boolean),
-      teamMembers: formData.teamMembers
-        .split(",")
-        .map((member) => member.trim())
-        .filter(Boolean),
+      tags: formData.tags.split(",").map((t) => t.trim()),
+      teamMembers: formData.teamMembers.split(",").map((t) => t.trim()),
       progress: 0,
       spent: 0,
       totalTasks: 0,
@@ -86,29 +96,7 @@ export function AddProjectModal({ open, onOpenChange }) {
       activity: [],
       createdAt: format(new Date(), "yyyy-MM-dd"),
     };
-    setTimeout(() => {
-      console.log(newProject);
-      toast.success("Project created successfully");
-      setLoading(false);
-      onOpenChange(false);
-      setFormData({
-        projectName: "",
-        client: "",
-        description: "",
-        budget: "",
-        currency: "USD",
-        startDate: undefined,
-        deadline: undefined,
-        status: "Planning",
-        priority: "Medium",
-        category: "CRM",
-        githubUrl: "",
-        liveUrl: "",
-        tags: "",
-        teamMembers: "",
-        thumbnail: "",
-      });
-    }, 1000);
+    mutate(newProject);
   };
 
   return (
@@ -355,10 +343,10 @@ export function AddProjectModal({ open, onOpenChange }) {
             <DialogClose render={<Button variant="outline">Cancel</Button>} />
             <Button
               type="submit"
-              disabled={loading}
+              disabled={isPending}
               className="btn-primary p-6 rounded-xl text-base"
             >
-              {loading ? "Creating..." : "Create Project"}
+              {isPending ? "Creating..." : "Create Project"}
             </Button>
           </DialogFooter>
         </form>
