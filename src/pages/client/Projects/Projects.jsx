@@ -91,17 +91,14 @@ function Projects() {
               {/* Top badges */}
               <div className="flex justify-between items-center mb-3">
                 <ProjectBadge type="status" value={project.status} />
-
                 <ProjectBadge type="priority" value={project.priority} />
               </div>
               <div className="flex items-start gap-5 ">
                 {/* Progress Circle */}
-
                 <ProgressCircle
                   progress={project.progress}
                   bgColor={progressColors[project.status] || "#7F56D9"}
                 />
-
                 <div>
                   <CardTitle className="text-xl text-text-primary">
                     {project.projectName}

@@ -174,7 +174,7 @@ function Dashboard() {
             <Card
               key={index}
               className="
-                glass-strong rounded-xl min-h-44 hover:border-purple-500/30 transition-all text-primary shadow-purple"
+                glass-strong min-h-44 hover:border-purple-500/30 transition-all text-primary shadow-purple"
             >
               <CardHeader className="flex flex-row items-start justify-between">
                 <div>

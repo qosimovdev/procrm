@@ -9,6 +9,7 @@
         "progress": 72,
         "budget": 85000,
         "spent": 56000,
+        "category": "Mobile App",
         "startDate": "2026-09-10",
         "deadline": "2027-01-25",
         "tags": [
@@ -32,6 +33,7 @@
         "progress": 89,
         "budget": 120000,
         "spent": 98000,
+        "category": "Mobile App",
         "startDate": "2026-08-01",
         "deadline": "2027-02-15",
         "tags": [
@@ -52,6 +54,7 @@
         "status": "Planning",
         "priority": "Medium",
         "progress": 15,
+        "category": "Mobile App",
         "budget": 65000,
         "spent": 12000,
         "startDate": "2026-11-01",
@@ -74,6 +77,7 @@
         "status": "In Progress",
         "priority": "High",
         "progress": 63,
+        "category": "Mobile App",
         "budget": 98000,
         "spent": 61000,
         "startDate": "2026-07-12",
@@ -96,6 +100,7 @@
         "status": "Under Review",
         "priority": "High",
         "progress": 77,
+        "category": "CRM App",
         "budget": 140000,
         "spent": 101000,
         "startDate": "2026-06-15",
@@ -119,6 +124,7 @@
         "priority": "Medium",
         "progress": 100,
         "budget": 54000,
+        "category": "CRM App",
         "spent": 52000,
         "startDate": "2026-03-10",
         "deadline": "2026-09-20",
@@ -138,8 +144,9 @@
         "client": "FlyAway",
         "description": "Reservation platform.",
         "status": "Blocked",
-        "priority": "Critical",
+        "priority": "Low",
         "progress": 48,
+        "category": "CRM App",
         "budget": 92000,
         "spent": 47000,
         "startDate": "2026-09-18",
@@ -148,7 +155,11 @@
             "React Native",
             "Node.js"
         ],
-        "teamMembers": [],
+        "teamMembers": [
+            {
+                "name": "ibrhim"
+            }
+        ],
         "tasks": [],
         "totalTasks": 22,
         "tasksCompleted": 10,
@@ -159,9 +170,9 @@
         "projectName": "EduLearn LMS",
         "client": "Bright Future Academy",
         "description": "Online learning platform.",
-        "status": "On Hold",
+        "status": "Completed",
         "priority": "Low",
-        "progress": 33,
+        "progress": 99,
         "budget": 71000,
         "spent": 25000,
         "startDate": "2026-10-20",
