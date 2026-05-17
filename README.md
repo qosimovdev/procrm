@@ -41,3 +41,13 @@ git clone https://github.com/qosimovdev/procrm
 npm install
 npm run dev
 ```
+
+---
+
+## Powered By
+
+Ibrohim Qosimov
+
+GitHub: https://github.com/qosimovdev  
+Email: qosimovdevv@gmail.com
+Telegram: @qosimovdev
