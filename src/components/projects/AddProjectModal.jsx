@@ -37,7 +37,6 @@ export function AddProjectModal({ open, onOpenChange }) {
     teamMembers: "",
     thumbnail: "",
   });
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -50,7 +49,6 @@ export function AddProjectModal({ open, onOpenChange }) {
       [name]: value,
     });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.projectName) {
