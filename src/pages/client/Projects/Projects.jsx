@@ -15,13 +15,16 @@ import ProgressLine, { ProgressCircle } from "@/components/ui/Progress";
 import { Plus, SquareCheckIcon, CalendarDays } from "lucide-react";
 import { AvatarGroups } from "@/components/layout/Avatar/AvatarGroup";
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
-import { AddProjectModal } from "@/components/projects/AddProjectModal";
+import { AddProjectModal } from "@/components/common/projects/AddProjectModal";
 import { useNavigate } from "react-router-dom";
-import { ProjectBadge } from "@/components/projects/ProjectBadge";
+import { ProjectBadge } from "@/components/common/projects/ProjectBadge";
+import ProjectCardSkeleton from "@/components/common/projects/ProjectCardSkelaton";
+import { useModalStore } from "../../../stores/modalStore";
 
 function Projects() {
   const [page, setPage] = useState(1);
-  const [addModalOpen, setAddModalOpen] = useState(false);
+  // const [addModalOpen, setAddModalOpen] = useState(false);
+  const { openModal, modalType, closeModal } = useModalStore();
 
   const {
     data: projects = [],
@@ -59,10 +62,7 @@ function Projects() {
       </p>
     );
   }
-  if (isLoading)
-    return (
-      <p className="text-4xl my-5 mx-2 text-text-primary">Loading Projects</p>
-    );
+  if (isLoading) return <ProjectCardSkeleton />;
   return (
     <section>
       <div className="flex items-center justify-between my-5">
@@ -75,11 +75,14 @@ function Projects() {
         <Button
           variant="default"
           className="btn-primary py-6 px-2 text-lg rounded-xl"
-          onClick={() => setAddModalOpen(true)}
+          onClick={() => openModal("create-project")}
         >
           <Plus className=" size-5" /> New Project
         </Button>
-        <AddProjectModal open={addModalOpen} onOpenChange={setAddModalOpen} />
+        <AddProjectModal
+          open={modalType === "create-project"}
+          onOpenChange={closeModal}
+        />
       </div>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 my-5 mt-6">
         {currentProject.map((project) => (

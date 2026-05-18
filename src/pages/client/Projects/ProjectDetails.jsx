@@ -11,15 +11,15 @@ import {
   Banknote,
   Wallet,
 } from "lucide-react";
-import { ProjectBadge } from "@/components/projects/ProjectBadge";
+import { ProjectBadge } from "@/components/common/projects/ProjectBadge";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProgressCircle } from "@/components/ui/Progress";
+import ProjectCardSkeleton from "@/components/common/projects/ProjectCardSkelaton";
 
 function ProjectDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
-
   const {
     data: project,
     isLoading,
@@ -29,7 +29,7 @@ function ProjectDetails() {
     queryFn: () => getProjectById(id),
   });
   if (isLoading) {
-    return <p className="text-text-secondary">Loading...</p>;
+    return <ProjectCardSkeleton />;
   }
   if (isError || !project) {
     return <p className="text-text-secondary">Project not found</p>;

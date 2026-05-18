@@ -8,9 +8,9 @@ import {
   CardTitle,
   CardDescription,
 } from "../../../components/ui/card";
-import { ChartAreaInteractive } from "../../../components/dashboard/ChartAreaInteractive";
-import { PendingDeadlines } from "../../../components/dashboard/DeadlineChart";
-import { TableActions } from "../../../components/dashboard/TaskOverview";
+import { ChartAreaInteractive } from "../../../components/common/dashboard/ChartAreaInteractive";
+import { PendingDeadlines } from "../../../components/common/dashboard/DeadlineChart";
+import { TableActions } from "../../../components/common/dashboard/TaskOverview";
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
 
 function Dashboard() {

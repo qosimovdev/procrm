@@ -1,0 +1,281 @@
+[
+    {
+        "id": 1,
+        "fullName": "Ibrohim Qosimov",
+        "username": "ibrohimdev",
+        "email": "qosimovdev@gmail.com",
+        "phone": "+998901234567",
+        "role": "Admin",
+        "permissions": [
+            "create_project",
+            "edit_project",
+            "delete_project",
+            "manage_users"
+        ],
+        "department": "Development",
+        "position": "Frontend Developer",
+        "avatar": "https://i.pravatar.cc/150?img=1",
+        "status": "Active",
+        "projectCount": 12,
+        "completedTasks": 48,
+        "pendingTasks": 5,
+        "lastLogin": "2026-05-18T10:30:00",
+        "createdAt": "2026-01-10T09:00:00",
+        "address": "Urganch, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "React va backend developer"
+    },
+    {
+        "id": 2,
+        "fullName": "Azizbek Karimov",
+        "username": "azizdev",
+        "email": "aziz@gmail.com",
+        "phone": "+998934567891",
+        "role": "Manager",
+        "permissions": [
+            "create_project",
+            "edit_project"
+        ],
+        "department": "Management",
+        "position": "Project Manager",
+        "avatar": "https://i.pravatar.cc/150?img=2",
+        "status": "Active",
+        "projectCount": 8,
+        "completedTasks": 35,
+        "pendingTasks": 4,
+        "lastLogin": "2026-05-17T15:20:00",
+        "createdAt": "2025-12-01T11:00:00",
+        "address": "Tashkent, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "Team management specialist"
+    },
+    {
+        "id": 3,
+        "fullName": "Jasurbek Aliyev",
+        "username": "jasurbek",
+        "email": "jasur@gmail.com",
+        "phone": "+998998887766",
+        "role": "User",
+        "permissions": [
+            "view_project"
+        ],
+        "department": "Design",
+        "position": "UI/UX Designer",
+        "avatar": "https://i.pravatar.cc/150?img=3",
+        "status": "Inactive",
+        "projectCount": 6,
+        "completedTasks": 22,
+        "pendingTasks": 7,
+        "lastLogin": "2026-05-14T09:10:00",
+        "createdAt": "2025-10-21T08:00:00",
+        "address": "Samarkand, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "Creative UI designer"
+    },
+    {
+        "id": 4,
+        "fullName": "Muhammadali Xasanov",
+        "username": "muhammaddev",
+        "email": "muhammad@gmail.com",
+        "phone": "+998907654321",
+        "role": "User",
+        "permissions": [
+            "view_project"
+        ],
+        "department": "Backend",
+        "position": "Node.js Developer",
+        "avatar": "https://i.pravatar.cc/150?img=4",
+        "status": "Active",
+        "projectCount": 10,
+        "completedTasks": 41,
+        "pendingTasks": 3,
+        "lastLogin": "2026-05-18T08:40:00",
+        "createdAt": "2025-11-11T10:15:00",
+        "address": "Bukhara, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "API and database expert"
+    },
+    {
+        "id": 5,
+        "fullName": "Sardorbek Rahimov",
+        "username": "sardor",
+        "email": "sardor@gmail.com",
+        "phone": "+998901112233",
+        "role": "Manager",
+        "permissions": [
+            "create_project",
+            "edit_project"
+        ],
+        "department": "Marketing",
+        "position": "Marketing Manager",
+        "avatar": "https://i.pravatar.cc/150?img=5",
+        "status": "Blocked",
+        "projectCount": 5,
+        "completedTasks": 18,
+        "pendingTasks": 6,
+        "lastLogin": "2026-05-10T14:25:00",
+        "createdAt": "2025-09-01T09:30:00",
+        "address": "Khiva, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "Digital marketing strategist"
+    },
+    {
+        "id": 6,
+        "fullName": "Shohruh Nurmatov",
+        "username": "shohruh",
+        "email": "shohruh@gmail.com",
+        "phone": "+998909998877",
+        "role": "User",
+        "permissions": [
+            "view_project"
+        ],
+        "department": "QA",
+        "position": "QA Engineer",
+        "avatar": "https://i.pravatar.cc/150?img=6",
+        "status": "Active",
+        "projectCount": 7,
+        "completedTasks": 29,
+        "pendingTasks": 2,
+        "lastLogin": "2026-05-18T12:10:00",
+        "createdAt": "2025-08-15T13:00:00",
+        "address": "Nukus, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "Software testing engineer"
+    },
+    {
+        "id": 7,
+        "fullName": "Dilshodbek Ergashev",
+        "username": "dilshod",
+        "email": "dilshod@gmail.com",
+        "phone": "+998935551122",
+        "role": "User",
+        "permissions": [
+            "view_project"
+        ],
+        "department": "Development",
+        "position": "React Developer",
+        "avatar": "https://i.pravatar.cc/150?img=7",
+        "status": "Active",
+        "projectCount": 9,
+        "completedTasks": 37,
+        "pendingTasks": 4,
+        "lastLogin": "2026-05-17T17:45:00",
+        "createdAt": "2025-07-20T15:40:00",
+        "address": "Andijan, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "Frontend enthusiast"
+    },
+    {
+        "id": 8,
+        "fullName": "Bekzod Tursunov",
+        "username": "bekzod",
+        "email": "bekzod@gmail.com",
+        "phone": "+998937778899",
+        "role": "Admin",
+        "permissions": [
+            "create_project",
+            "edit_project",
+            "delete_project",
+            "manage_users"
+        ],
+        "department": "Security",
+        "position": "System Administrator",
+        "avatar": "https://i.pravatar.cc/150?img=8",
+        "status": "Active",
+        "projectCount": 11,
+        "completedTasks": 50,
+        "pendingTasks": 1,
+        "lastLogin": "2026-05-18T07:55:00",
+        "createdAt": "2025-06-18T10:20:00",
+        "address": "Namangan, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "Infrastructure and security expert"
+    },
+    {
+        "id": 9,
+        "fullName": "Oybek Yoqubov",
+        "username": "oybek",
+        "email": "oybek@gmail.com",
+        "phone": "+998901234000",
+        "role": "User",
+        "permissions": [
+            "view_project"
+        ],
+        "department": "Support",
+        "position": "Support Specialist",
+        "avatar": "https://i.pravatar.cc/150?img=9",
+        "status": "Inactive",
+        "projectCount": 4,
+        "completedTasks": 14,
+        "pendingTasks": 8,
+        "lastLogin": "2026-05-12T11:00:00",
+        "createdAt": "2025-05-05T09:45:00",
+        "address": "Fergana, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "Customer support assistant"
+    },
+    {
+        "id": 10,
+        "fullName": "Temurbek Sobirov",
+        "username": "temur",
+        "email": "temur@gmail.com",
+        "phone": "+998998881100",
+        "role": "Manager",
+        "permissions": [
+            "create_project",
+            "edit_project"
+        ],
+        "department": "Finance",
+        "position": "Financial Analyst",
+        "avatar": "https://i.pravatar.cc/150?img=10",
+        "status": "Active",
+        "projectCount": 13,
+        "completedTasks": 44,
+        "pendingTasks": 5,
+        "lastLogin": "2026-05-18T13:15:00",
+        "createdAt": "2025-04-10T14:10:00",
+        "address": "Jizzakh, Uzbekistan",
+        "socials": {
+            "github": "https://github.com/ibrohimdev",
+            "linkedin": "https://linkedin.com/in/ibrohimdev",
+            "telegram": "@ibrohimdev"
+        },
+        "bio": "Business and finance analyst"
+    }
+]
