@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProjectById } from "@/api/projects.service";
+import { getProjectById } from "@/api/projects.api";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,

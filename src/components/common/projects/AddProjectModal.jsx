@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createProject } from "@/api/projects.service";
+import { createProject } from "@/api/projects.api";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getProjects } from "../../../api/projects.service";
+import { getProjects } from "../../../api/projects.api";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,6 @@ import { useModalStore } from "../../../stores/modalStore";
 
 function Projects() {
   const [page, setPage] = useState(1);
-  // const [addModalOpen, setAddModalOpen] = useState(false);
   const { openModal, modalType, closeModal } = useModalStore();
 
   const {

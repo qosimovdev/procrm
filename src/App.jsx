@@ -2,6 +2,7 @@ import Header from "./components/layout/Header/Header";
 import AppRouter from "./routes/AppRouter";
 import Sidebar from "./components/layout/Sidebar/Sidebar";
 import { Toaster } from "sonner";
+
 function App() {
   return (
     <>
