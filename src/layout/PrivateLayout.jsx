@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header/Header";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
-// import AppRouter from "@/routes/AppRouter";
+import { AuthProvider } from "@/providers/AuthProvider";
 function PrivateLayout() {
   return (
     <>
@@ -11,7 +11,9 @@ function PrivateLayout() {
         <Sidebar />
         <main className="main flex-1 p-6 px-7 relative z-10">
           <Header />
-          <Outlet />
+          <AuthProvider>
+            <Outlet />
+          </AuthProvider>
           {/* <AppRouter /> */}
         </main>
       </div>

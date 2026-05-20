@@ -5,7 +5,6 @@ function App() {
   return (
     <>
       <div className="">
-        {/* <Outlet /> */}
         <AppRouter />
       </div>
       <Toaster

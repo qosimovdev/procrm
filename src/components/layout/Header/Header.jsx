@@ -5,7 +5,6 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -14,13 +13,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-
 import { Input } from "@/components/ui/input";
-
 import { Search, User, Settings, LogOut, Bell } from "lucide-react";
 import { NavLink } from "react-router-dom";
-
+import useAuthStore from "@/stores/authStore";
+import { useQueryClient } from "@tanstack/react-query";
 function Header() {
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+  const queryClient = useQueryClient();
+  const handleLogout = () => {
+    logout();
+    queryClient.clear();
+    window.location("/auth/login");
+  };
   return (
     <header className="sticky top-0 z-10 p-3 glass-strong rounded-xl shadow-purple ">
       <div className="flex items-center justify-between">
@@ -54,10 +60,19 @@ function Header() {
               <button className="cursor-pointer outline-none">
                 <Avatar
                   size="lg"
-                  className="glass-strong border border-white/10 shadow-purple transition-all duration-300 hover:scale-105"
+                  className="glass-strong !rounded-full shadow-purple transition-all duration-300 hover:scale-105"
                 >
-                  <AvatarImage src="https://i.pravatar.cc/150?img=11" />
-                  <AvatarFallback>IQ</AvatarFallback>
+                  <AvatarImage
+                    src={user?.avatar || "/default-avatar.png"}
+                    alt={user?.fullName}
+                  />
+                  <AvatarFallback>
+                    {user?.fullName
+                      ?.split(" ")
+                      .map((item) => item[0])
+                      .join("")
+                      .slice(0, 2) || "IQ"}
+                  </AvatarFallback>
                   <AvatarBadge className="bg-emerald-500" />
                 </Avatar>
               </button>
@@ -70,8 +85,18 @@ function Header() {
               <DropdownMenuLabel className="py-3">
                 <div className="flex items-center gap-3">
                   <Avatar>
-                    <AvatarImage src="https://i.pravatar.cc/150?img=11" />
-                    <AvatarFallback>IQ</AvatarFallback>
+                    <AvatarImage
+                      src={user?.avatar || "/default-avatar.png"}
+                      alt={user?.fullName}
+                    />
+
+                    <AvatarFallback>
+                      {user?.fullName
+                        ?.split(" ")
+                        .map((item) => item[0])
+                        .join("")
+                        .slice(0, 2) || "IQ"}
+                    </AvatarFallback>
                   </Avatar>
                   <div>
                     <h4 className="text-sm font-semibold text-white">
@@ -106,7 +131,7 @@ function Header() {
                 variant="destructive"
                 className="h-10 cursor-pointer hover:bg-destructive/50 text-destructive"
               >
-                <NavLink to="/logout">
+                <NavLink onClick={handleLogout}>
                   <LogOut className="size-4" />
                   Logout
                 </NavLink>
