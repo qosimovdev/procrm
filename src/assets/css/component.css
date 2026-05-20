@@ -59,7 +59,7 @@
 
   --color-primary: var(--purple);
   --color-primary-light: var(--purple-light);
-
+  --color-blue: var(--blue);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);

@@ -4,11 +4,11 @@ const useAuthStore = create((set) => ({
     user: null,
     token: localStorage.getItem("token") || null,
     login: (data) => {
-        localStorage.setItem("token", data.token);
         set({
             user: data.user,
             token: data.token,
         });
+        localStorage.setItem("token", data.token);
     },
     logout: () => {
         localStorage.removeItem("token");

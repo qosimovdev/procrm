@@ -100,7 +100,7 @@ function Header() {
                   </Avatar>
                   <div>
                     <h4 className="text-sm font-semibold text-white">
-                      Ibrohim
+                      {user?.fullName}
                     </h4>
                     <p className="text-xs text-slate-400">Frontend Developer</p>
                   </div>

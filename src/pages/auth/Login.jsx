@@ -9,8 +9,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const { mutate, isPending } = useLogin();
   const [formData, setFormData] = useState({
     email: "",
@@ -49,7 +51,7 @@ function Login() {
             </span>
             <h2 className="text-6xl font-bold leading-tight mt-6">
               Welcome to <br />
-              CRM Pro
+              <span className="text-gradient">CRM Pro</span>
             </h2>
             <p className="text-gray-400 text-lg mt-6 leading-8">
               Manage your clients, projects and team in one place. Grow your
@@ -105,7 +107,7 @@ function Login() {
 
       {/* RIGHT SIDE */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
-        <div className="w-full max-w-md glass-strong !rounded-3xl p-8 shadow-purple">
+        <div className="w-full max-w-lg glass-strong !rounded-3xl p-8 shadow-purple">
           <form onSubmit={handleSubmit}>
             <FieldGroup>
               <FieldSet>
@@ -190,26 +192,33 @@ function Login() {
                   </div>
 
                   {/* socials */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <Button
-                      variant="outline"
-                      className="h-12 border-white/10 bg-white/5"
-                    >
-                      Google
-                    </Button>
-
-                    <Button
-                      variant="outline"
-                      className="h-12 border-white/10 bg-white/5"
-                    >
-                      GitHub
-                    </Button>
+                  <div className="glass-strong">
+                    <div className="mx-4 my-2 space-y-1">
+                      <p className="text-gradient font-bold text-lg">
+                        Demo Account{" "}
+                      </p>
+                      <div className="flex-1 h-px bg-white/10" />
+                      <p>
+                        <span className="text-gradient text-base">Email: </span>{" "}
+                        test@gmail.com
+                      </p>
+                      <div className="flex-1 h-px bg-white/10" />
+                      <p>
+                        <span className="text-gradient text-base">
+                          Password:{" "}
+                        </span>
+                        123456
+                      </p>
+                    </div>
                   </div>
 
                   {/* bottom */}
-                  <p className="text-center text-gray-400 text-sm pt-4">
+                  <p className="text-center text-gray-400 text-base pt-4">
                     Don't have an account?{" "}
-                    <span className="text-violet-400 cursor-pointer">
+                    <span
+                      className="text-violet-400 cursor-pointer"
+                      onClick={() => navigate("/auth/register")}
+                    >
                       Sign up
                     </span>
                   </p>
