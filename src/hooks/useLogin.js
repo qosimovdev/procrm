@@ -13,8 +13,6 @@ export const useLogin = () => {
         onSuccess: (data) => {
             // zustand save
             login(data);
-            // localStorage save
-            // localStorage.setItem("token", data.token);
             toast.success("Login successful");
             // redirect
             navigate("/dashboard")

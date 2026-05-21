@@ -12,7 +12,7 @@ function Sidebar() {
     { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
     { name: "Projects", icon: FolderKanban, path: "/projects" },
     { name: "Tasks", icon: CheckSquare, path: "/tasks" },
-    { name: "Developers", icon: Users, path: "/developers" },
+    { name: "Team", icon: Users, path: "/team" },
     { name: "Settings", icon: Settings, path: "/settings" },
   ];
 
