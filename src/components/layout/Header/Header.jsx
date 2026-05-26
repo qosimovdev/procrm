@@ -27,6 +27,8 @@ function Header() {
     queryClient.clear();
     window.location("/auth/login");
   };
+  console.log(user?.position);
+
   return (
     <header className="sticky top-0 z-10 p-3 glass-strong rounded-xl shadow-purple ">
       <div className="flex items-center justify-between">
@@ -102,7 +104,9 @@ function Header() {
                     <h4 className="text-sm font-semibold text-white">
                       {user?.fullName}
                     </h4>
-                    <p className="text-xs text-slate-400">Frontend Developer</p>
+                    <p className="text-xs text-slate-400">
+                      {user?.position || "Not yet entred"}
+                    </p>
                   </div>
                 </div>
               </DropdownMenuLabel>

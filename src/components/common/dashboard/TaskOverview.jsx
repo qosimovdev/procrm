@@ -35,7 +35,7 @@ export function TableActions({ tasks }) {
     },
   };
   return (
-    <div className="overflow-x-auto rounded-xl  shadow-purple">
+    <div className="overflow-x-auto rounded-xl shadow-purple">
       <Table className="text-text-primary">
         <TableHeader className="glass ">
           <TableRow className="hover:bg-black/10">

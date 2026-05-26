@@ -19,6 +19,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
+import { Card, CardTitle } from "@/components/ui/card";
 
 function Developers() {
   const [page, setPage] = useState(1);
@@ -57,77 +59,96 @@ function Developers() {
         /> */}
       </div>
       {/* team members */}
-      <div className="overflow-x-auto rounded-xl  shadow-purple">
-        {/* <Card> */}
-        <Table className="text-text-primary">
-          <TableHeader className="glass">
-            <TableRow className="hover:bg-black/10">
-              <TableHead className="text-text-primary font-bold text-lg">
-                Member
-              </TableHead>
-              <TableHead className="text-text-primary font-bold text-lg">
-                Role
-              </TableHead>
-              <TableHead className="text-text-primary font-bold text-lg">
-                Department
-              </TableHead>
-              <TableHead className="text-text-primary font-bold text-lg">
-                Status
-              </TableHead>
-              <TableHead className="text-text-primary font-bold text-lg">
-                Joined At
-              </TableHead>
-              <TableHead className="text-text-primary font-bold text-lg">
-                Actions
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {currentMembers.map((user) => (
-              <TableRow
-                className="hover:bg-white/5 transition text-base text-text-secondary"
-                key={user.id}
-              >
-                <TableCell>{user.fullName}</TableCell>
-                <TableCell>{user.role}</TableCell>
-                <TableCell>{user.department}</TableCell>
-                <TableCell>{user.status}</TableCell>
-                <TableCell>{user.lastLogin}</TableCell>
-                <TableCell>
-                  {" "}
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="size-8 rounded-xl hover:bg-white/10 hover:glass hover:shadow-purple hover:text-text-primary transition-all duration-300"
-                      >
-                        <MoreHorizontalIcon className="size-5" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      align="end"
-                      className="glass text-text-primary "
-                    >
-                      <DropdownMenuItem className="hover:bg-gradient-dark">
-                        Edit
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="hover:bg-gradient-dark">
-                        View Details
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem variant="destructive">
-                        Delete
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
+      <div className="overflow-x-auto rounded-xl shadow-purple">
+        <Card className="glass shadow-purple rounded-xl p-4 py-5">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-2xl text-text-primary ">
+              Task Overview
+            </CardTitle>
+            <div className="flex items-center justify-between my-2">
+              <div>
+                <CardTitle className="hidden text-sm text-text-secondary font-medium ">
+                  Showing 1 to 5 of 25 tasks
+                </CardTitle>
+              </div>
+              <div>
+                <PaginationDemo
+                  page={page}
+                  setPage={setPage}
+                  totalPages={totalMembers}
+                />
+              </div>
+            </div>
+          </div>
+          <Table className="text-text-primary">
+            <TableHeader className="glass">
+              <TableRow className="hover:bg-black/10">
+                <TableHead className="text-text-primary font-bold text-lg">
+                  Member
+                </TableHead>
+                <TableHead className="text-text-primary font-bold text-lg">
+                  Role
+                </TableHead>
+                <TableHead className="text-text-primary font-bold text-lg">
+                  Department
+                </TableHead>
+                <TableHead className="text-text-primary font-bold text-lg">
+                  Status
+                </TableHead>
+                <TableHead className="text-text-primary font-bold text-lg">
+                  Joined At
+                </TableHead>
+                <TableHead className="text-text-primary font-bold text-lg">
+                  Actions
+                </TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        {/* </Card> */}
+            </TableHeader>
+
+            <TableBody>
+              {currentMembers.map((user) => (
+                <TableRow
+                  className="hover:bg-white/5 transition text-base text-text-secondary"
+                  key={user.id}
+                >
+                  <TableCell>{user.fullName}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell>{user.department}</TableCell>
+                  <TableCell>{user.status}</TableCell>
+                  <TableCell>{user.lastLogin}</TableCell>
+                  <TableCell>
+                    {" "}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="size-8 rounded-xl hover:bg-white/10 hover:glass hover:shadow-purple hover:text-text-primary transition-all duration-300"
+                        >
+                          <MoreHorizontalIcon className="size-5" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        align="end"
+                        className="glass text-text-primary "
+                      >
+                        <DropdownMenuItem className="hover:bg-gradient-dark">
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="hover:bg-gradient-dark">
+                          View Details
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem variant="destructive">
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Card>
       </div>
     </section>
   );
