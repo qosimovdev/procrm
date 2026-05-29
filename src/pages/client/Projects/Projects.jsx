@@ -61,7 +61,8 @@ function Projects() {
       </p>
     );
   }
-  if (isLoading) return <ProjectCardSkeleton />;
+  // if (isLoading) return <ProjectCardSkeleton />;
+
   return (
     <section>
       <div className="flex items-center justify-between my-5">

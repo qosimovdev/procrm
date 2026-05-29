@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
 import { Card, CardTitle } from "@/components/ui/card";
+import AddMemberModal from "@/components/common/Team/AddMemberModal";
 
 function Developers() {
   const [page, setPage] = useState(1);
@@ -46,6 +47,11 @@ function Developers() {
           <h1 className="text-3xl font-bold text-text-primary">Team Members</h1>
           <p className="text-text-secondary">Team Members</p>
         </div>
+
+        <AddMemberModal
+          open={modalType === "invite-member"}
+          onOpenChange={closeModal}
+        />
         <Button
           variant="default"
           className="btn-primary py-6 px-2 text-lg rounded-xl"
@@ -53,10 +59,6 @@ function Developers() {
         >
           <Plus className=" size-5" /> Invite Member
         </Button>
-        {/* <AddProjectModal
-          open={modalType === "create-project"}
-          onOpenChange={closeModal}
-        /> */}
       </div>
       {/* team members */}
       <div className="overflow-x-auto rounded-xl shadow-purple">
