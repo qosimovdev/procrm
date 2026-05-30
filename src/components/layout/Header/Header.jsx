@@ -27,7 +27,7 @@ function Header() {
     queryClient.clear();
     window.location("/auth/login");
   };
-  console.log(user?.position);
+  console.log(user?.department);
 
   return (
     <header className="sticky top-0 z-10 p-3 glass-strong rounded-xl shadow-purple ">

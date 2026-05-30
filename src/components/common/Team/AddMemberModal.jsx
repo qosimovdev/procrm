@@ -13,6 +13,15 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function AddMemberModal({ open, onOpenChange }) {
   const { mutate: createUser, isPending } = useCreateUser();
@@ -21,7 +30,7 @@ function AddMemberModal({ open, onOpenChange }) {
     fullName: "",
     userName: "",
     email: "",
-    role: "Developer",
+    role: "",
     department: "",
     password: "",
   });
@@ -33,8 +42,21 @@ function AddMemberModal({ open, onOpenChange }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser(form);
+    createUser(form, {
+      onSuccess: () => {
+        setForm({
+          fullName: "",
+          userName: "",
+          email: "",
+          role: "",
+          department: "",
+          password: "",
+        });
+        onOpenChange(false);
+      },
+    });
   };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-full max-w-2xl glass-strong text-text-primary shadow-purple max-h-[90vh] overflow-y-auto">
@@ -78,19 +100,104 @@ function AddMemberModal({ open, onOpenChange }) {
               />
             </Field>
             <Field>
+              <Label className="text-base">Role</Label>
+              <Select
+                value={form.role}
+                onValueChange={(value) =>
+                  setForm({
+                    ...form,
+                    role: value,
+                  })
+                }
+              >
+                <SelectTrigger className="w-full glass-strong py-5 text-lg ">
+                  <SelectValue placeholder="Select a role" />
+                </SelectTrigger>
+                <SelectContent className="glass-strong ">
+                  <SelectGroup className="text-lg ">
+                    <SelectLabel className="text-lg font-bold text-text-primary">
+                      Roles
+                    </SelectLabel>
+                    <SelectItem
+                      className="text-lg text-text-secondary"
+                      value="Developer"
+                    >
+                      Developer
+                    </SelectItem>
+                    <SelectItem
+                      className="text-lg text-text-secondary"
+                      value="Manager"
+                    >
+                      Manager
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </Field>
+            <Field>
               <Label className="text-base">Department</Label>
-              <Input
-                name="department"
+              <Select
                 value={form.department}
-                onChange={handleChange}
-                placeholder="Enter member department"
-                className="glass-strong"
-              />
+                onValueChange={(value) =>
+                  setForm({
+                    ...form,
+                    department: value,
+                  })
+                }
+              >
+                <SelectTrigger className="w-full glass-strong py-5 text-lg ">
+                  <SelectValue placeholder="Select a department" />
+                </SelectTrigger>
+                <SelectContent className="glass-strong">
+                  <SelectGroup className="text-lg">
+                    <SelectLabel className="text-lg font-bold text-text-primary">
+                      Department
+                    </SelectLabel>
+                    <SelectItem
+                      className="text-lg text-text-secondary"
+                      value="Engineering"
+                    >
+                      Engineering
+                    </SelectItem>
+                    <SelectItem
+                      className="text-lg text-text-secondary"
+                      value="Design"
+                    >
+                      Design
+                    </SelectItem>
+                    <SelectItem
+                      className="text-lg text-text-secondary"
+                      value="Product"
+                    >
+                      Product
+                    </SelectItem>
+                    <SelectItem
+                      className="text-lg text-text-secondary"
+                      value="QA"
+                    >
+                      QA
+                    </SelectItem>
+                    <SelectItem
+                      className="text-lg text-text-secondary"
+                      value="HR"
+                    >
+                      HR
+                    </SelectItem>
+                    <SelectItem
+                      className="text-lg text-text-secondary"
+                      value="Finance"
+                    >
+                      Finance
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </Field>
             <Field>
               <Label className="text-base">Password</Label>
               <Input
                 name="password"
+                type="password"
                 value={form.password}
                 onChange={handleChange}
                 placeholder="Enter member new password"
@@ -110,7 +217,6 @@ function AddMemberModal({ open, onOpenChange }) {
           </DialogFooter>
         </form>
       </DialogContent>
-      <form onSubmit={handleSubmit}></form>
     </Dialog>
   );
 }
