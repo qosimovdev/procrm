@@ -18,6 +18,7 @@ import { Search, User, Settings, LogOut, Bell } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import useAuthStore from "@/stores/authStore";
 import { useQueryClient } from "@tanstack/react-query";
+import { Alert } from "../Alert/Alert";
 function Header() {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
@@ -135,10 +136,12 @@ function Header() {
                 variant="destructive"
                 className="h-10 cursor-pointer hover:bg-destructive/50 text-destructive"
               >
-                <NavLink onClick={handleLogout}>
-                  <LogOut className="size-4" />
-                  Logout
-                </NavLink>
+                <Alert
+                  alerTitle="Log out"
+                  alertDesc="Are you sure?"
+                  icon={<LogOut />}
+                  handler={() => handleLogout()}
+                />
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

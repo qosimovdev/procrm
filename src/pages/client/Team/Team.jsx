@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MoreHorizontalIcon, Plus } from "lucide-react";
+import { MoreHorizontalIcon, Plus, Trash2Icon } from "lucide-react";
 import { useModalStore } from "@/stores/modalStore";
 import { useGetUsers } from "@/hooks/useGetUser";
 import { useEffect, useState } from "react";
@@ -22,10 +22,13 @@ import {
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
 import { Card, CardTitle } from "@/components/ui/card";
 import AddMemberModal from "@/components/common/Team/AddMemberModal";
+import { useDeleteUser } from "@/hooks/useDeleteUser";
+import { Alert } from "@/components/layout/Alert/Alert";
 
 function Developers() {
   const [page, setPage] = useState(1);
   const { openModal, modalType, closeModal } = useModalStore();
+  const { mutate: deleteUser } = useDeleteUser();
   const { data, isLoading, error } = useGetUsers();
   const users = data?.users ?? [];
   useEffect(() => {
@@ -33,12 +36,13 @@ function Developers() {
       toast.error(error.message || "Failed to load team members");
     }
   }, [error]);
-
   const itemsPerPage = 8;
   const totalMembers = Math.ceil(users.length / itemsPerPage);
   const startIndex = (page - 1) * itemsPerPage;
   const currentMembers = users.slice(startIndex, startIndex + itemsPerPage);
-
+  const handleDelete = (id) => {
+    deleteUser(id);
+  };
   if (isLoading) return <div>Loading...</div>;
   return (
     <section>
@@ -86,7 +90,10 @@ function Developers() {
             <TableHeader className="glass">
               <TableRow className="hover:bg-black/10">
                 <TableHead className="text-text-primary font-bold text-lg">
-                  Member
+                  Member Name
+                </TableHead>
+                <TableHead className="text-text-primary font-bold text-lg">
+                  Email
                 </TableHead>
                 <TableHead className="text-text-primary font-bold text-lg">
                   Role
@@ -95,10 +102,10 @@ function Developers() {
                   Department
                 </TableHead>
                 <TableHead className="text-text-primary font-bold text-lg">
-                  Status
+                  Position
                 </TableHead>
                 <TableHead className="text-text-primary font-bold text-lg">
-                  Joined At
+                  Status
                 </TableHead>
                 <TableHead className="text-text-primary font-bold text-lg">
                   Actions
@@ -113,10 +120,11 @@ function Developers() {
                   key={user.id}
                 >
                   <TableCell>{user.fullName}</TableCell>
+                  <TableCell>{user.email}</TableCell>
                   <TableCell>{user.role}</TableCell>
-                  <TableCell>{user.department}</TableCell>
+                  <TableCell>{user.department || "-"}</TableCell>
+                  <TableCell>{user.position || "-"}</TableCell>
                   <TableCell>{user.status}</TableCell>
-                  <TableCell>{user.lastLogin}</TableCell>
                   <TableCell>
                     {" "}
                     <DropdownMenu>
@@ -133,16 +141,19 @@ function Developers() {
                         align="end"
                         className="glass text-text-primary "
                       >
-                        <DropdownMenuItem className="hover:bg-gradient-dark">
+                        <DropdownMenuItem className="hover:bg-gradient-dark cursor-pointer">
                           Edit
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-gradient-dark">
+                        <DropdownMenuItem className="hover:bg-gradient-dark cursor-pointer">
                           View Details
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem variant="destructive">
-                          Delete
-                        </DropdownMenuItem>
+                        <Alert
+                          alerTitle="Delete Member?"
+                          alertDesc="Are you sure?"
+                          handler={() => handleDelete(user.id)}
+                          icon={<Trash2Icon />}
+                        />
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

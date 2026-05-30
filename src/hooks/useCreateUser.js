@@ -11,7 +11,10 @@ export const useCreateUser = () => {
             queryClient.invalidateQueries({ queryKey: ["users"] });
         },
         onError: (error) => {
-            toast.error(error.message || "Failed to create user");
+            toast.error(
+                error.response?.data?.message ??
+                "Something went wrong"
+            );
         },
     });
 };
