@@ -151,6 +151,8 @@ function Developers() {
                         <Alert
                           alerTitle="Delete Member?"
                           alertDesc="Are you sure?"
+                          firstBtnText="Delete Member"
+                          btnText="Delete"
                           handler={() => handleDelete(user.id)}
                           icon={<Trash2Icon />}
                         />

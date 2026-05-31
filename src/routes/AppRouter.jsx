@@ -5,6 +5,11 @@ import Register from "@/pages/auth/Register";
 import Login from "@/pages/auth/Login";
 import ProtectedRoute from "./ProtectedRouter";
 import PrivateLayout from "@/layout/PrivateLayout";
+import ProfileSetting from "@/pages/client/Settings/ProfileSetting";
+import WorkInformationSetting from "@/pages/client/Settings/WorkInformationSetting";
+import SecuritySetting from "@/pages/client/Settings/SecuritySetting";
+import ActivitySetting from "@/pages/client/Settings/ActivitySetting";
+import SettingLayout from "@/pages/client/Settings/SettingLayout";
 
 const Dashboard = lazy(() => import("../pages/client/Dashboard/Dashboard"));
 const Projects = lazy(() => import("../pages/client/Projects/Projects"));
@@ -13,7 +18,7 @@ const ProjectDetails = lazy(
 );
 const Tasks = lazy(() => import("../pages/client/Tasks"));
 const Team = lazy(() => import("../pages/client/Team/Team"));
-const Setting = lazy(() => import("../pages/client/Setting"));
+// const Setting = lazy(() => import("../pages/client/Settings/Setting"));
 const Profile = lazy(() => import("../pages/client/Profile"));
 
 export default function AppRouter() {
@@ -35,7 +40,14 @@ export default function AppRouter() {
             <Route path="/projects/:id" element={<ProjectDetails />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/team" element={<Team />} />
-            <Route path="/settings" element={<Setting />} />
+            {/* Setting page */}
+            <Route path="/settings" element={<SettingLayout />}>
+              <Route index element={<Navigate to="profile" replace />} />
+              <Route path="profile" element={<ProfileSetting />} />
+              <Route path="work" element={<WorkInformationSetting />} />
+              <Route path="security" element={<SecuritySetting />} />
+              <Route path="activity" element={<ActivitySetting />} />
+            </Route>
             <Route path="/profile" element={<Profile />} />
           </Route>
         </Route>

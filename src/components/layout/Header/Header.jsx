@@ -19,17 +19,17 @@ import { NavLink } from "react-router-dom";
 import useAuthStore from "@/stores/authStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { Alert } from "../Alert/Alert";
+import { useNavigate } from "react-router-dom";
 function Header() {
+  const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   const queryClient = useQueryClient();
   const handleLogout = () => {
     logout();
     queryClient.clear();
-    window.location("/auth/login");
+    navigate("/auth/login");
   };
-  console.log(user?.department);
-
   return (
     <header className="sticky top-0 z-10 p-3 glass-strong rounded-xl shadow-purple ">
       <div className="flex items-center justify-between">
@@ -139,6 +139,9 @@ function Header() {
                 <Alert
                   alerTitle="Log out"
                   alertDesc="Are you sure?"
+                  firstBtnText="Log Out"
+                  firstBtnIcon={<LogOut />}
+                  btnText="Log Out"
                   icon={<LogOut />}
                   handler={() => handleLogout()}
                 />

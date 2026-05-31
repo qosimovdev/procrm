@@ -15,6 +15,25 @@ export const getMe = async () => {
     return res.data.user;
 };
 
+export const updateProfile = async (data) => {
+    const res = await api.patch("/users/me", data)
+    return res.data
+}
+
+export const uploadAvatar = async (formData, onProgress) => {
+    const res = await api.patch("/users/me/avatar", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (e) => {
+            if (onProgress) {
+                onProgress(Math.round((e.loaded * 100) / e.total));
+            }
+        },
+    });
+    return res.data;
+};
+
 export const deleteUser = async (id) => {
     const res = await api.delete(`/users/${id}`);
     return res.data;

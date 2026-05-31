@@ -12,15 +12,24 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
-export function Alert({ alerTitle, alertDesc, handler, icon }) {
+export function Alert({
+  alerTitle,
+  alertDesc,
+  firstBtnText,
+  firstBtnIcon,
+  btnText,
+  handler,
+  icon,
+}) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
           variant="destructive"
-          className="p-4 cursor-pointer rounded-2xl"
+          className="py-5 px-2 flex items-center gap-2 justify-start w-full cursor-pointer rounded-xl"
         >
-          Delete Member
+          {firstBtnIcon}
+          {firstBtnText}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent size="sm" className="glass-strong">
@@ -47,7 +56,7 @@ export function Alert({ alerTitle, alertDesc, handler, icon }) {
             className="cursor-pointer p-4 rounded-xl"
             onClick={handler}
           >
-            Delete
+            {btnText}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
