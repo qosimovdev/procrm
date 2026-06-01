@@ -30,6 +30,9 @@ function Header() {
     queryClient.clear();
     navigate("/auth/login");
   };
+  const avatarSrc = user?.avatar
+    ? `${import.meta.env.VITE_SERVER_URL}${user.avatar}`
+    : "/default-avatar.png";
   return (
     <header className="sticky top-0 z-10 p-3 glass-strong rounded-xl shadow-purple ">
       <div className="flex items-center justify-between">
@@ -65,10 +68,7 @@ function Header() {
                   size="lg"
                   className="glass-strong !rounded-full shadow-purple transition-all duration-300 hover:scale-105"
                 >
-                  <AvatarImage
-                    src={user?.avatar || "/default-avatar.png"}
-                    alt={user?.fullName}
-                  />
+                  <AvatarImage src={avatarSrc} alt={user?.fullName} />
                   <AvatarFallback>
                     {user?.fullName
                       ?.split(" ")
@@ -88,10 +88,7 @@ function Header() {
               <DropdownMenuLabel className="py-3">
                 <div className="flex items-center gap-3">
                   <Avatar>
-                    <AvatarImage
-                      src={user?.avatar || "/default-avatar.png"}
-                      alt={user?.fullName}
-                    />
+                    <AvatarImage src={avatarSrc} alt={user?.fullName} />
 
                     <AvatarFallback>
                       {user?.fullName

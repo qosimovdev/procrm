@@ -17,7 +17,7 @@ function Sidebar() {
   ];
 
   return (
-    <aside className="w-66 min-h-full glass-strong rounded-xl p-4 m-6 my-5 mr-0 shadow-purple">
+    <aside className="w-20 min-h-full glass-strong rounded-xl p-4 m-6 my-5 mr-0 shadow-purple md:w-56 lg:w-66">
       <h1 className="hidden md:block text-gradient text-2xl font-bold mb-8">
         ProCRM
       </h1>

@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 
 import { toast } from "sonner";
 import { useUploadAvatar } from "@/hooks/useUploadAvatar";
+import { Camera } from "lucide-react";
 
 export default function AvatarUpload({ user, onSuccess }) {
   const [imageSrc, setImageSrc] = useState(null);
@@ -103,7 +104,7 @@ export default function AvatarUpload({ user, onSuccess }) {
       const compressedFile = await compressImage(croppedFile);
       const formData = new FormData();
       formData.append("avatar", compressedFile);
-      await uploadAvatar({
+      const result = await uploadAvatar({
         formData,
         onProgress: (percent) => {
           setProgress(percent);
@@ -113,7 +114,7 @@ export default function AvatarUpload({ user, onSuccess }) {
       setImageSrc(null);
       setZoom(1);
       setCrop({ x: 0, y: 0 });
-      onSuccess?.();
+      onSuccess?.(result);
     } catch (error) {
       console.error(error);
       toast.error(error?.response?.data?.message || "Upload failed");
@@ -127,23 +128,42 @@ export default function AvatarUpload({ user, onSuccess }) {
     (user?.avatar
       ? `${import.meta.env.VITE_SERVER_URL}${user.avatar}`
       : undefined);
-  console.log(user?.avatar);
-  console.log(avatarSrc);
   return (
     <div className="space-y-4">
-      <Avatar className="w-24 h-24">
-        <AvatarImage src={avatarSrc} />
-        <AvatarFallback>
-          {user?.fullName?.charAt(0)?.toUpperCase() || "U"}
-        </AvatarFallback>
-      </Avatar>
+      <div className="relative w-fit ml-0">
+        {/* <Avatar className="w-50 h-50"> */}
+        <Avatar className="w-40 h-40 md:w-48 md:h-48">
+          <AvatarImage src={avatarSrc} />
+          <AvatarFallback>
+            {user?.fullName?.charAt(0)?.toUpperCase() || "U"}
+          </AvatarFallback>
+        </Avatar>
 
-      <Input
-        type="file"
-        accept="image/*"
-        onChange={onFileChange}
-        disabled={uploading}
-      />
+        <label
+          htmlFor="avatar-upload"
+          className="
+         absolute bottom-1 right-1
+         h-10 w-10
+         rounded-full
+         bg-primary
+         flex items-center justify-center
+        cursor-pointer
+        shadow-lg
+         hover:scale-105
+        transition
+    "
+        >
+          <Camera className="size-5 text-white" />
+        </label>
+
+        <Input
+          id="avatar-upload"
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
+          className="hidden"
+        />
+      </div>
 
       {imageSrc && (
         <>
@@ -188,13 +208,35 @@ export default function AvatarUpload({ user, onSuccess }) {
         </div>
       )}
 
-      <Button
-        className="w-full"
+      <div className="flex gap-2 justify-center">
+        <Button
+          disabled={!imageSrc || uploading}
+          onClick={handleUpload}
+          className="btn-primary p-3 text-text-primary text-sm cursor-pointer"
+        >
+          {uploading ? "Uploading..." : "Update Avatar"}
+        </Button>
+        <Button
+          disabled={!imageSrc}
+          type="button"
+          variant="outline"
+          onClick={() => {
+            setImageSrc(null);
+            setZoom(1);
+            setCrop({ x: 0, y: 0 });
+          }}
+          className="text-text-primary text-sm p-3 cursor-pointer"
+        >
+          Cancel
+        </Button>
+      </div>
+      {/* <Button
+        className=""
         disabled={!imageSrc || uploading}
         onClick={handleUpload}
       >
         {uploading ? "Uploading..." : "Save Avatar"}
-      </Button>
+      </Button> */}
     </div>
   );
 }
