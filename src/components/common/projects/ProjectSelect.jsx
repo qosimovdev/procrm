@@ -8,19 +8,30 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function CustomSelect({ label, placeholder, value, onChange, options }) {
+export function CustomSelect({
+  label,
+  placeholder,
+  value,
+  onChange,
+  options,
+  disabled,
+}) {
   return (
-    <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-full py-5.5 glass-strong">
+    <Select disabled={disabled} value={value} onValueChange={onChange}>
+      <SelectTrigger className="w-full py-5.5 glass-strong text-text-primary text-base ">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-
-      <SelectContent className="glass-strong text-text-primary text-base ">
+      <SelectContent className="glass-strong text-text-primary text-base">
         <SelectGroup>
-          <SelectLabel>{label}</SelectLabel>
-
+          <SelectLabel className="text-base text-text-primary font-bold">
+            {label}
+          </SelectLabel>
           {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem
+              key={option.value}
+              value={option.value}
+              className="text-text-primary text-base"
+            >
               {option.label}
             </SelectItem>
           ))}

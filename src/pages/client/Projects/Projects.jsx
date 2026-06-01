@@ -18,7 +18,7 @@ import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
 import { AddProjectModal } from "@/components/common/projects/AddProjectModal";
 import { useNavigate } from "react-router-dom";
 import { ProjectBadge } from "@/components/common/projects/ProjectBadge";
-import ProjectCardSkeleton from "@/components/common/projects/ProjectCardSkelaton";
+// import ProjectCardSkeleton from "@/components/common/projects/ProjectCardSkelaton";
 import { useModalStore } from "../../../stores/modalStore";
 
 function Projects() {
@@ -27,7 +27,7 @@ function Projects() {
 
   const {
     data: projects = [],
-    isLoading,
+    // isLoading,
     isError,
     error,
   } = useQuery({

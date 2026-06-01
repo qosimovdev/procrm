@@ -1,26 +1,12 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { useUpdateProfile } from "@/hooks/useUpdateProfile";
 import useAuthStore from "@/stores/authStore";
-import { Building2 } from "lucide-react";
 import { useMemo } from "react";
-import AvatarUpload from "@/components/common/settings/AvatarUpload";
-import { FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+import ProfileCard from "@/components/common/settings/ProfileCard";
+import WorkCard from "@/components/common/settings/WorkCard";
 function ProfileSetting() {
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
-  const [isEditing, setIsEditing] = useState(false);
   const { mutate: updateProfile, isPending } = useUpdateProfile();
   const initialForm = {
     fullName: "",
@@ -75,36 +61,28 @@ function ProfileSetting() {
     }),
     [user],
   );
-  const isChanged = useMemo(() => {
-    return JSON.stringify(form) !== JSON.stringify(original);
-  }, [form, original]);
   const handleChange = (e) => {
     setForm((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateProfile(form, {
-      onSuccess: (res) => {
-        setUser(res.user || form);
-        setIsEditing(false);
-      },
-    });
-  };
-  const handleAvatarSuccess = (res) => {
-    const avatar = res?.avatar || res?.data?.avatar;
-    setForm((prev) => ({
-      ...prev,
-      avatar: avatar,
-    }));
-  };
   const labelStyle = "text-lg text-text-primary font-bold block mb-2";
   return (
     <section>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-5">
-        <Card>
+        <ProfileCard
+          form={form}
+          setForm={setForm}
+          user={user}
+          handleChange={handleChange}
+          original={original}
+          updateProfile={updateProfile}
+          isPending={isPending}
+          setUser={setUser}
+          labelStyle={labelStyle}
+        />
+        {/* <Card>
           <CardHeader className="flex gap-4 items-start text-text-primary">
             <Building2 className="text-primary-light" />
             <div>
@@ -116,18 +94,15 @@ function ProfileSetting() {
               </CardDescription>
             </div>
           </CardHeader>
-          {/* <CardContent className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 "> */}
           <CardContent className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* <div className="col-span-1"> */}
             <div className="lg:col-span-1">
               <CardDescription className={labelStyle}>Avatar</CardDescription>
               <div className="w-full max-w-56">
                 <AvatarUpload user={user} onSuccess={handleAvatarSuccess} />
               </div>
             </div>
-            {/* <div className="col-span-1 lg:col-span-2"> */}
             <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleProfileSubmit}>
                 <FieldGroup>
                   <FieldSet>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -135,7 +110,6 @@ function ProfileSetting() {
                         <FieldLabel className={labelStyle}>
                           Full Name
                         </FieldLabel>
-
                         <Input
                           name="fullName"
                           type="text"
@@ -148,7 +122,6 @@ function ProfileSetting() {
 
                       <div>
                         <FieldLabel className={labelStyle}>Email</FieldLabel>
-
                         <Input
                           name="email"
                           type="email"
@@ -163,7 +136,6 @@ function ProfileSetting() {
                         <FieldLabel className={labelStyle}>
                           User Name
                         </FieldLabel>
-
                         <Input
                           name="userName"
                           type="text"
@@ -176,7 +148,6 @@ function ProfileSetting() {
 
                       <div className="space-y-2">
                         <FieldLabel className={labelStyle}>Phone</FieldLabel>
-
                         <div className="input flex items-center">
                           <PhoneInput
                             international
@@ -200,7 +171,6 @@ function ProfileSetting() {
 
                       <div className="col-span-2">
                         <FieldLabel className={labelStyle}>Bio</FieldLabel>
-
                         <Textarea
                           name="bio"
                           value={form.bio ?? ""}
@@ -213,7 +183,6 @@ function ProfileSetting() {
 
                       <div className="col-span-2">
                         <FieldLabel className={labelStyle}>Address</FieldLabel>
-
                         <Input
                           name="address"
                           type="text"
@@ -263,8 +232,129 @@ function ProfileSetting() {
               </form>
             </div>
           </CardContent>
-        </Card>
-        <Card></Card>
+        </Card> */}
+        {/* <Card>
+          <CardHeader className="flex gap-4 items-start text-text-primary">
+            <BriefcaseBusiness className="text-primary-light" />
+            <div>
+              <CardTitle className="text-xl font-bold">
+                Work Information
+              </CardTitle>
+              <CardDescription className="text-sm">
+                Update your work related information
+              </CardDescription>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleWorkSubmit}>
+              <FieldGroup>
+                <FieldSet className="grid grid-cols-1 lg:grid-cols-2">
+                  <div>
+                    <FieldLabel className={labelStyle}>Department</FieldLabel>
+                    <CustomSelect
+                      value={form.department}
+                      disabled={!isEditingWork}
+                      onChange={(value) =>
+                        setForm((prev) => ({ ...prev, department: value }))
+                      }
+                      placeholder="Select department"
+                      options={[
+                        { label: "Engineering", value: "Engineering" },
+                        { label: "Design", value: "Design" },
+                        { label: "Product", value: "Product" },
+                        { label: "HR", value: "HR" },
+                        { label: "Finance", value: "Finance" },
+                        { label: "QA", value: "QA" },
+                      ]}
+                    />
+                  </div>
+
+                  <div>
+                    <FieldLabel className={labelStyle}>Position</FieldLabel>
+                    <CustomSelect
+                      placeholder="Select your position"
+                      value={form.position}
+                      disabled={!isEditingWork}
+                      onChange={(value) =>
+                        setForm((prev) => ({ ...prev, position: value }))
+                      }
+                      options={[
+                        {
+                          label: "Frontend Developer",
+                          value: "Frontend Developer",
+                        },
+                        {
+                          label: "Backend Developer",
+                          value: "Backend Developer",
+                        },
+                        { label: "UI/UX Designer", value: "UI/UX Designer" },
+                        {
+                          label: "Full-Stack Developer",
+                          value: "Full-Stack Developer",
+                        },
+                        { label: "DevOps Engineer", value: "DevOps Engineer" },
+                        { label: "Project Manager", value: "Project Manager" },
+                        { label: "HR Manager", value: "HR Manager" },
+                        {
+                          label: "Financial Analyst",
+                          value: "Financial Analyst",
+                        },
+                        {
+                          label: "Marketing Specialist",
+                          value: "Marketing Specialist",
+                        },
+                        { label: "QA Engineer", value: "QA Engineer" },
+                      ]}
+                    />
+                  </div>
+                </FieldSet>
+              </FieldGroup>
+              <div className="flex justify-end gap-3 mt-5">
+                {!isEditingWork ? (
+                  <Button
+                    type="button"
+                    onClick={() => setIsEditingWork(true)}
+                    className="btn-primary p-4 text-sm cursor-pointer"
+                  >
+                    Edit Profile
+                  </Button>
+                ) : (
+                  <>
+                    <Button
+                      className="p-4 text-text-primary text-sm cursor-pointer"
+                      type="button"
+                      variant="outline"
+                      onClick={() => {
+                        setForm(original);
+                        setIsEditingWork(false);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+
+                    <Button
+                      type="submit"
+                      disabled={isPending || !isChanged}
+                      className="btn-primary p-4 text-sm cursor-pointer"
+                    >
+                      {isPending ? "Saving..." : "Save Changes"}
+                    </Button>
+                  </>
+                )}
+              </div>
+            </form>
+          </CardContent>
+        </Card> */}
+        <WorkCard
+          form={form}
+          setForm={setForm}
+          handleChange={handleChange}
+          original={original}
+          updateProfile={updateProfile}
+          isPending={isPending}
+          setUser={setUser}
+          labelStyle={labelStyle}
+        />
       </div>
     </section>
   );
