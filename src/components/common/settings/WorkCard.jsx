@@ -10,6 +10,7 @@ import { FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { CustomSelect } from "../projects/ProjectSelect";
 import { BriefcaseBusiness } from "lucide-react";
 import { useMemo, useState } from "react";
+import { Input } from "@/components/ui/input";
 
 function WorkCard({
   form,
@@ -54,6 +55,7 @@ function WorkCard({
                 <FieldLabel className={labelStyle}>Department</FieldLabel>
                 <CustomSelect
                   value={form.department}
+                  defaultValue={form.department}
                   disabled={!isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, department: value }))
@@ -108,8 +110,66 @@ function WorkCard({
                   ]}
                 />
               </div>
+
+              <div>
+                <FieldLabel className={labelStyle}>Role</FieldLabel>
+                <CustomSelect
+                  placeholder="Select your role"
+                  value={form.role}
+                  disabled={!isEditing}
+                  onChange={(value) =>
+                    setForm((prev) => ({ ...prev, role: value }))
+                  }
+                  options={[
+                    { label: "Admin", value: "Admin" },
+                    { label: "Manager", value: "Manager" },
+                    { label: "Developer", value: "Developer" },
+                  ]}
+                />
+                <p className="text-sm text-muted-foreground mt-2 mb-4">
+                  Only admin can change role
+                </p>
+              </div>
+
+              <div>
+                <FieldLabel className={labelStyle}>Status</FieldLabel>
+                <CustomSelect
+                  placeholder="Select your status"
+                  value={form.status}
+                  disabled={!isEditing}
+                  onChange={(value) =>
+                    setForm((prev) => ({ ...prev, status: value }))
+                  }
+                  options={[
+                    { label: "Active", value: "Active" },
+                    { label: "Inactive", value: "Inactive" },
+                    { label: "Blocked", value: "Blocked" },
+                  ]}
+                />
+                <p className="text-sm text-muted-foreground mt-2 mb-4">
+                  Only admin can change status
+                </p>
+              </div>
+
+              <div>
+                <FieldLabel className={labelStyle}>Company</FieldLabel>
+                <Input value={form.company?.name || ""} disabled />
+              </div>
+
+              <div>
+                <FieldLabel className={labelStyle}>Member Since</FieldLabel>
+                <Input
+                  value={
+                    form?.createdAt
+                      ? new Date(form.createdAt).toLocaleString("uz-UZ")
+                      : ""
+                  }
+                  disabled
+                />
+              </div>
             </FieldSet>
           </FieldGroup>
+
           <div className="flex justify-end gap-3 mt-5">
             {!isEditing ? (
               <Button
