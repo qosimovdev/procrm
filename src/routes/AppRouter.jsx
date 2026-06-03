@@ -5,11 +5,9 @@ import Register from "@/pages/auth/Register";
 import Login from "@/pages/auth/Login";
 import ProtectedRoute from "./ProtectedRouter";
 import PrivateLayout from "@/layout/PrivateLayout";
-import ProfileSetting from "@/pages/client/Settings/ProfileSetting";
 import WorkInformationSetting from "@/pages/client/Settings/WorkInformationSetting";
 import SecuritySetting from "@/pages/client/Settings/SecuritySetting";
 import ActivitySetting from "@/pages/client/Settings/ActivitySetting";
-import SettingLayout from "@/pages/client/Settings/SettingLayout";
 
 const Dashboard = lazy(() => import("../pages/client/Dashboard/Dashboard"));
 const Projects = lazy(() => import("../pages/client/Projects/Projects"));
@@ -20,6 +18,12 @@ const Tasks = lazy(() => import("../pages/client/Tasks"));
 const Team = lazy(() => import("../pages/client/Team/Team"));
 // const Setting = lazy(() => import("../pages/client/Settings/Setting"));
 const Profile = lazy(() => import("../pages/client/Profile"));
+const ProfileSetting = lazy(
+  () => import("../pages/client/Settings/ProfileSetting"),
+);
+const SettingLayout = lazy(
+  () => import("../pages/client/Settings/SettingLayout"),
+);
 
 export default function AppRouter() {
   return (

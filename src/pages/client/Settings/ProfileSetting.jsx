@@ -34,6 +34,7 @@ function ProfileSetting() {
   const [form, setForm] = useState(initialForm);
   useEffect(() => {
     if (user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setForm({
         fullName: user.fullName || "",
         email: user.email || "",
@@ -108,7 +109,6 @@ function ProfileSetting() {
   //   }));
   // };
   const labelStyle = "text-lg text-text-primary font-bold block mb-2";
-  console.log(form.socials);
 
   return (
     <section>

@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Building2 } from "lucide-react";
+import { Building2, Edit, Save, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import AvatarUpload from "./AvatarUpload";
 import { FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
@@ -164,6 +164,7 @@ function ProfileCard({
                   onClick={() => setIsEditing(true)}
                   className="btn-primary p-4 text-sm cursor-pointer"
                 >
+                  <Edit className="w-4 h-4 mr-1" />
                   Edit Profile
                 </Button>
               ) : (
@@ -177,6 +178,7 @@ function ProfileCard({
                       setIsEditing(false);
                     }}
                   >
+                    <X className="w-4 h-4 mr-1" />
                     Cancel
                   </Button>
 
@@ -185,6 +187,7 @@ function ProfileCard({
                     disabled={isPending || !isChanged}
                     className="btn-primary p-4 text-sm cursor-pointer"
                   >
+                    <Save className="w-4 h-4 mr-1" />
                     {isPending ? "Saving..." : "Save Changes"}
                   </Button>
                 </>

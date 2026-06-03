@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { CustomSelect } from "../projects/ProjectSelect";
-import { BriefcaseBusiness } from "lucide-react";
+import { BriefcaseBusiness, Edit, Save, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 
@@ -177,6 +177,7 @@ function WorkCard({
                 onClick={() => setIsEditing(true)}
                 className="btn-primary p-4 text-sm cursor-pointer"
               >
+                <Edit className="w-4 h-4 mr-1" />
                 Edit Profile
               </Button>
             ) : (
@@ -190,6 +191,7 @@ function WorkCard({
                     setIsEditing(false);
                   }}
                 >
+                  <X className="w-4 h-4 mr-1" />
                   Cancel
                 </Button>
 
@@ -198,6 +200,7 @@ function WorkCard({
                   disabled={isPending || !isChanged}
                   className="btn-primary p-4 text-sm cursor-pointer"
                 >
+                  <Save className="w-4 h-4 mr-1" />
                   {isPending ? "Saving..." : "Save Changes"}
                 </Button>
               </>

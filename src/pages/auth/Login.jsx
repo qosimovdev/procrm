@@ -42,7 +42,7 @@ function Login() {
           {/* logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-primary" />
-            <h1 className="text-2xl font-bold">CRM Pro</h1>
+            <h1 className="text-2xl font-bold">PRO CRM</h1>
           </div>
           {/* content */}
           <div className="max-w-xl">
@@ -51,7 +51,7 @@ function Login() {
             </span>
             <h2 className="text-6xl font-bold leading-tight mt-6">
               Welcome to <br />
-              <span className="text-gradient">CRM Pro</span>
+              <span className="text-gradient">PRO CRM</span>
             </h2>
             <p className="text-gray-400 text-lg mt-6 leading-8">
               Manage your clients, projects and team in one place. Grow your
@@ -106,8 +106,8 @@ function Login() {
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
-        <div className="w-full max-w-lg glass-strong !rounded-3xl p-8 shadow-purple">
+      <div className="p-4 w-full lg:w-1/2 flex items-center justify-center md:p-6">
+        <div className="p-4 w-full max-w-lg glass-strong rounded-3xl md:p-8 shadow-purple">
           <form onSubmit={handleSubmit}>
             <FieldGroup>
               <FieldSet>
