@@ -3,8 +3,9 @@ import { useUpdateProfile } from "@/hooks/useUpdateProfile";
 import useAuthStore from "@/stores/authStore";
 import { useMemo } from "react";
 import ProfileCard from "@/components/common/settings/ProfileCard";
-import WorkCard from "@/components/common/settings/WorkCard";
-import SocialCard from "@/components/common/settings/SocialCard";
+import WorkCard from "../../../components/common/settings/WorkCard";
+import SocialCard from "../../../components/common/settings/SocialCard";
+import SecurityCard from "../../../components/common/settings/SecurityCard";
 function ProfileSetting() {
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
@@ -142,8 +143,10 @@ function ProfileSetting() {
           updateProfile={updateProfile}
           isPending={isPending}
           setUser={setUser}
+          user={user}
           labelStyle={labelStyle}
         />
+        <SecurityCard labelStyle={labelStyle} />
       </div>
     </section>
   );

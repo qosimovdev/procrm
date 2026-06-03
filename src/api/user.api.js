@@ -38,3 +38,8 @@ export const deleteUser = async (id) => {
     const res = await api.delete(`/users/${id}`);
     return res.data;
 };
+
+export const changePassword = async (data) => {
+    const res = await api.patch("/users/change-password", data)
+    return res.data
+}
