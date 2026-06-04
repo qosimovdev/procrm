@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MoreHorizontalIcon, Plus, Trash2Icon } from "lucide-react";
+import { MoreHorizontalIcon, Plus, Trash2Icon, User } from "lucide-react";
 import { useModalStore } from "@/stores/modalStore";
 import { useGetUsers } from "../../../hooks/useGetUser";
 import { useEffect, useState } from "react";
@@ -21,13 +21,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
 import { Card, CardTitle } from "@/components/ui/card";
-import AddMemberModal from "@/components/common/Team/AddMemberModal";
 import { useDeleteUser } from "@/hooks/useDeleteUser";
 import { Alert } from "@/components/layout/Alert/Alert";
+import { EmptyCard } from "@/components/layout/Empty/Empty";
 
 function Developers() {
   const [page, setPage] = useState(1);
-  const { openModal, modalType, closeModal } = useModalStore();
+  const { openModal } = useModalStore();
   const { mutate: deleteUser } = useDeleteUser();
   const { data, isLoading, error } = useGetUsers();
   const users = data?.users ?? [];
@@ -44,7 +44,18 @@ function Developers() {
     deleteUser(id);
   };
   if (isLoading) return <div>Loading...</div>;
-  console.log(users);
+
+  if (users.length === 0) {
+    return (
+      <EmptyCard
+        icon={<User />}
+        title="No Team Members Yet"
+        description="Invite members to join your team and start collaborating."
+        actionText="Invite Member"
+        onAction={() => openModal("invite-member")}
+      />
+    );
+  }
 
   return (
     <section>
@@ -54,10 +65,6 @@ function Developers() {
           <p className="text-text-secondary">Team Members</p>
         </div>
 
-        <AddMemberModal
-          open={modalType === "invite-member"}
-          onOpenChange={closeModal}
-        />
         <Button
           variant="default"
           className="btn-primary py-6 px-2 text-lg rounded-xl"

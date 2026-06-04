@@ -10,21 +10,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import ProgressLine, { ProgressCircle } from "@/components/ui/Progress";
-import { Plus, SquareCheckIcon, CalendarDays } from "lucide-react";
+import { Plus, SquareCheckIcon, CalendarDays, FolderCode } from "lucide-react";
 import { AvatarGroups } from "../../../components/layout/Avatar/AvatarGroup";
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
-import { AddProjectModal } from "@/components/common/projects/AddProjectModal";
 import { useNavigate } from "react-router-dom";
 import { ProjectBadge } from "@/components/common/projects/ProjectBadge";
 // import ProjectCardSkeleton from "@/components/common/projects/ProjectCardSkelaton";
 import { useModalStore } from "../../../stores/modalStore";
 import { useProjects } from "../../../hooks/projects/useProjects";
+import { EmptyCard } from "../../../components/layout/Empty/Empty";
 
 function Projects() {
   const [page, setPage] = useState(1);
-  const { openModal, modalType, closeModal } = useModalStore();
+  const { openModal } = useModalStore();
   const { data: projects = [], isLoading, isError, error } = useProjects();
-
   const navigate = useNavigate();
   const itemsPerPage = 8;
   const totalProjects = Math.ceil(projects.length / itemsPerPage);
@@ -48,8 +47,18 @@ function Projects() {
       error.response?.data?.message ?? "Failed to load projects",
     );
   }
-  console.log(projects);
 
+  if (projects.length === 0) {
+    return (
+      <EmptyCard
+        icon={<FolderCode />}
+        title="No Projects Yet"
+        description="Create your first project to start tracking tasks, budgets, deadlines, and team progress."
+        actionText="Create Project"
+        onAction={() => openModal("create-project")}
+      />
+    );
+  }
   return (
     <section>
       <div className="flex items-center justify-between my-5">
@@ -66,10 +75,6 @@ function Projects() {
         >
           <Plus className=" size-5" /> New Project
         </Button>
-        <AddProjectModal
-          open={modalType === "create-project"}
-          onOpenChange={closeModal}
-        />
       </div>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 my-5 mt-6">
         {currentProject.map((project) => (
@@ -153,22 +158,24 @@ function Projects() {
           </Card>
         ))}
       </div>
-      <Card className="w-full sticky bottom-0 z-50 glass-strong text-primary shadow-purple pl-3 pr-1 py-4 ">
-        <div className="flex items-center justify-between gap-4 flex-wrap">
-          <p className="text-sm text-text-secondary">
-            Showing {startIndex + 1} to{" "}
-            {Math.min(startIndex + itemsPerPage, projects.length)} of{" "}
-            {projects.length} projects
-          </p>
-          <div className="">
-            <PaginationDemo
-              page={page}
-              setPage={setPage}
-              totalPages={totalProjects}
-            />
+      {projects.length > 0 && (
+        <Card className="w-full sticky bottom-0 z-50 glass-strong text-primary shadow-purple pl-3 pr-1 py-4 ">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <p className="text-sm text-text-secondary">
+              Showing {startIndex + 1} to{" "}
+              {Math.min(startIndex + itemsPerPage, projects.length)} of{" "}
+              {projects.length} projects
+            </p>
+            <div className="">
+              <PaginationDemo
+                page={page}
+                setPage={setPage}
+                totalPages={totalProjects}
+              />
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      )}
     </section>
   );
 }
