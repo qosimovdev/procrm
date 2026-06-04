@@ -7,10 +7,10 @@ export const createProject = async (data) => {
 
 export const getProjects = async () => {
     const res = await api.get("/projects")
-    return res.data
+    return res.data.data
 }
 
 export const getProjectById = async (id) => {
     const res = await api.get(`/projects/${id}`);
-    return res.data;
+    return res.data.data;
 };

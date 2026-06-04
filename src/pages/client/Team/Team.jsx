@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { MoreHorizontalIcon, Plus, Trash2Icon } from "lucide-react";
 import { useModalStore } from "@/stores/modalStore";
-import { useGetUsers } from "@/hooks/useGetUser";
+import { useGetUsers } from "../../../hooks/useGetUser";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
@@ -44,6 +44,8 @@ function Developers() {
     deleteUser(id);
   };
   if (isLoading) return <div>Loading...</div>;
+  console.log(users);
+
   return (
     <section>
       <div className="flex items-center justify-between my-5">
@@ -69,7 +71,7 @@ function Developers() {
         <Card className="glass shadow-purple rounded-xl p-4 py-5">
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl text-text-primary ">
-              Task Overview
+              Team Overview
             </CardTitle>
             <div className="flex items-center justify-between my-2">
               <div>

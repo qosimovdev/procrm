@@ -120,13 +120,13 @@ function AddMemberModal({ open, onOpenChange }) {
                     </SelectLabel>
                     <SelectItem
                       className="text-lg text-text-secondary"
-                      value="Developer"
+                      value="DEVELOPER"
                     >
                       Developer
                     </SelectItem>
                     <SelectItem
                       className="text-lg text-text-secondary"
-                      value="Manager"
+                      value="MANAGER"
                     >
                       Manager
                     </SelectItem>

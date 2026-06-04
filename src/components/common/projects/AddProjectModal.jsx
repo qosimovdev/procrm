@@ -1,5 +1,3 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createProject } from "@/api/projects.api";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Checkbox } from "../../ui/checkbox";
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,23 +18,15 @@ import { DatePicker } from "@/components/ui/DatePicker";
 import { format } from "date-fns";
 import { CustomSelect } from "./ProjectSelect";
 import { toast } from "sonner";
+import { useGetUsers } from "../../../hooks/useGetUser";
+import { useCreateProject } from "../../../hooks/projects/useCreateProject";
 
 export function AddProjectModal({ open, onOpenChange }) {
-  const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
-    mutationFn: createProject,
-    onSuccess: () => {
-      toast.success("Project created successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["projects"],
-      });
-      onOpenChange(false);
-      setFormData(initialState);
-    },
-    onError: () => {
-      toast.error("Failed to create project");
-    },
-  });
+  const { mutate: createProject, isPending } = useCreateProject();
+  const { data } = useGetUsers();
+  const users = data?.users ?? [];
+
+  const [selectedMembers, setSelectedMembers] = useState([]);
   const initialState = {
     projectName: "",
     client: "",
@@ -78,27 +69,34 @@ export function AddProjectModal({ open, onOpenChange }) {
       return;
     }
     const newProject = {
-      id: Date.now(),
-      ...formData,
+      projectName: formData.projectName,
+      client: formData.client,
+      description: formData.description,
+      budget: formData.budget,
+      currency: formData.currency,
       startDate: formData.startDate
         ? format(formData.startDate, "yyyy-MM-dd")
-        : "",
+        : null,
+
       deadline: formData.deadline
         ? format(formData.deadline, "yyyy-MM-dd")
-        : "",
-      tags: formData.tags.split(",").map((t) => t.trim()),
-      teamMembers: formData.teamMembers.split(",").map((t) => t.trim()),
-      progress: 0,
-      spent: 0,
-      totalTasks: 0,
-      tasksCompleted: 0,
-      tasks: [],
-      activity: [],
-      createdAt: format(new Date(), "yyyy-MM-dd"),
+        : null,
+      status: formData.status,
+      priority: formData.priority,
+      category: formData.category,
+      githubUrl: formData.githubUrl,
+      liveUrl: formData.liveUrl,
+      tags: formData.tags ? formData.tags.split(",").map((t) => t.trim()) : [],
+      thumbnail: formData.thumbnail,
+      members: selectedMembers,
     };
-    mutate(newProject);
+    createProject(newProject, {
+      onSuccess: () => {
+        setFormData(initialState);
+        onOpenChange(false);
+      },
+    });
   };
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-full max-w-5xl glass-strong text-text-primary shadow-purple max-h-[90vh] overflow-y-auto">
@@ -262,6 +260,8 @@ export function AddProjectModal({ open, onOpenChange }) {
                     { label: "Web App", value: "Web App" },
                     { label: "SaaS", value: "SaaS" },
                     { label: "Mobile App", value: "Mobile App" },
+                    { label: "E-Commerce", value: "E-Commerce" },
+                    { label: "ERP", value: "ERP" },
                   ]}
                 />
               </Field>
@@ -303,13 +303,36 @@ export function AddProjectModal({ open, onOpenChange }) {
             <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <Field>
                 <Label className="text-base">Team Members</Label>
-                <Input
-                  name="teamMembers"
-                  value={formData.teamMembers}
-                  onChange={handleChange}
-                  placeholder="John, Alex, Emma"
-                  className="glass-strong"
-                />
+
+                <div className="space-y-3 mt-2">
+                  {users.map((user) => (
+                    <div
+                      key={user.id}
+                      className="flex items-center gap-3 rounded-md border p-2"
+                    >
+                      <Checkbox
+                        checked={selectedMembers.includes(user.id)}
+                        onCheckedChange={(checked) => {
+                          if (checked) {
+                            setSelectedMembers((prev) => [...prev, user.id]);
+                          } else {
+                            setSelectedMembers((prev) =>
+                              prev.filter((id) => id !== user.id),
+                            );
+                          }
+                        }}
+                      />
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium">
+                          {user.fullName}
+                        </span>
+                        <span className="text-xs text-gray-500">
+                          {user.role}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </Field>
               <Field>
                 <Label className="text-base">Tags</Label>

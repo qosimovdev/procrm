@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getProjects } from "../../../api/projects.api";
+import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -13,32 +11,19 @@ import {
 } from "@/components/ui/card";
 import ProgressLine, { ProgressCircle } from "@/components/ui/Progress";
 import { Plus, SquareCheckIcon, CalendarDays } from "lucide-react";
-import { AvatarGroups } from "@/components/layout/Avatar/AvatarGroup";
+import { AvatarGroups } from "../../../components/layout/Avatar/AvatarGroup";
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
 import { AddProjectModal } from "@/components/common/projects/AddProjectModal";
 import { useNavigate } from "react-router-dom";
 import { ProjectBadge } from "@/components/common/projects/ProjectBadge";
 // import ProjectCardSkeleton from "@/components/common/projects/ProjectCardSkelaton";
 import { useModalStore } from "../../../stores/modalStore";
+import { useProjects } from "../../../hooks/projects/useProjects";
 
 function Projects() {
   const [page, setPage] = useState(1);
   const { openModal, modalType, closeModal } = useModalStore();
-
-  const {
-    data: projects = [],
-    // isLoading,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["projects"],
-    queryFn: getProjects,
-  });
-  useEffect(() => {
-    if (error) {
-      toast.error(error.message || "Failed to load projects");
-    }
-  }, [error]);
+  const { data: projects = [], isLoading, isError, error } = useProjects();
 
   const navigate = useNavigate();
   const itemsPerPage = 8;
@@ -54,14 +39,16 @@ function Projects() {
     Blocked: "#f97316",
   };
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   if (isError) {
-    return (
-      <p className="text-text-danger text-xl">
-        Something went wrong while loading projects
-      </p>
+    return toast.error(
+      error.response?.data?.message ?? "Failed to load projects",
     );
   }
-  // if (isLoading) return <ProjectCardSkeleton />;
+  console.log(projects);
 
   return (
     <section>
@@ -151,10 +138,10 @@ function Projects() {
                   <span>
                     <CalendarDays size={20} />
                   </span>
-                  <p>Due {project.deadline}</p>
+                  {new Date(project.deadline).toLocaleDateString()}
                 </div>
               </div>
-              <AvatarGroups />
+              <AvatarGroups members={project.members} />
               {/* Button */}
               <Button
                 className="w-full p-4 btn-primary rounded-xl mt-2 opacity-10 hover:opacity-100"

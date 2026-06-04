@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-    // baseURL: 'http://localhost:5577/api',
-    baseURL: 'https://procrm-backend.onrender.com/api',
+    baseURL: 'http://localhost:5577/api',
+    // baseURL: 'https://procrm-backend.onrender.com/api',
     headers: {
         "Content-Type": "application/json",
     }
@@ -10,12 +10,10 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
-
     if (token) {
         config.headers.Authorization =
             `Bearer ${token}`;
     }
-
     return config;
 });
 

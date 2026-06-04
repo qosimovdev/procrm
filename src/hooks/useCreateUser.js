@@ -1,4 +1,4 @@
-import { createUser } from "@/api/user.api";
+import { createUser } from "../api/user.api";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 

@@ -1,11 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { getProjectById } from "@/api/projects.api";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Building2,
   GalleryVerticalEnd,
-  CheckSquare,
+  // CheckSquare,
   Users,
   CalendarDays,
   Banknote,
@@ -16,24 +14,21 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProgressCircle } from "@/components/ui/Progress";
 import ProjectCardSkeleton from "@/components/common/projects/ProjectCardSkelaton";
+import { useProject } from "../../../hooks/projects/useProject";
 
 function ProjectDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const {
-    data: project,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["project", id],
-    queryFn: () => getProjectById(id),
-  });
+  const { data: project, isLoading, isError } = useProject(id);
+
   if (isLoading) {
     return <ProjectCardSkeleton />;
   }
   if (isError || !project) {
     return <p className="text-text-secondary">Project not found</p>;
   }
+  console.log(project.budgetTotal);
+
   const progressColors = {
     Planning: "#a855f7",
     "In Progress": "#3b82f6",
@@ -41,11 +36,11 @@ function ProjectDetails() {
     Testing: "#6366f1",
     Blocked: "#f97316",
   };
-  const completedTaskPercent = project.totalTasks
-    ? Math.round((project.tasksCompleted / project.totalTasks) * 100)
-    : 0;
-  const budgetPercent = project.budget
-    ? Math.round((project.spent / project.budget) * 100)
+  // const completedTaskPercent = project.totalTasks
+  //   ? Math.round((project.tasksCompleted / project.totalTasks) * 100)
+  //   : 0;
+  const budgetPercent = project.budgetTotal
+    ? Math.round((project.budgetSpent / project.budgetTotal) * 100)
     : 0;
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
@@ -67,20 +62,20 @@ function ProjectDetails() {
       ),
     },
 
-    {
-      title: "Tasks",
-      value: `${project.tasksCompleted} / ${project.totalTasks}`,
-      subtitle: `${completedTaskPercent}% Completed`,
-      icon: (
-        <div className="p-4 rounded-xl bg-blue-500/10 text-blue-400">
-          <CheckSquare />
-        </div>
-      ),
-    },
+    // {
+    //   title: "Tasks",
+    //   value: `${project.tasksCompleted} / ${project.totalTasks}`,
+    //   subtitle: `${completedTaskPercent}% Completed`,
+    //   icon: (
+    //     <div className="p-4 rounded-xl bg-blue-500/10 text-blue-400">
+    //       <CheckSquare />
+    //     </div>
+    //   ),
+    // },
 
     {
       title: "Team Members",
-      value: project.teamMembers?.length || 0,
+      value: project.members?.length || 0,
       subtitle: "Active members",
       icon: (
         <div className="p-4 rounded-xl bg-purple-500/10 text-purple-400">
@@ -91,7 +86,7 @@ function ProjectDetails() {
 
     {
       title: "Deadline",
-      value: project.deadline || "N/A",
+      value: new Date(project.deadline).toLocaleDateString() || "N/A",
       subtitle: "Project due date",
       icon: (
         <div className="p-4 rounded-xl bg-orange-500/10 text-orange-400">
@@ -102,7 +97,7 @@ function ProjectDetails() {
 
     {
       title: "Budget",
-      value: formatCurrency(project.budget),
+      value: formatCurrency(project.budgetTotal),
       subtitle: "Total Budget",
       icon: (
         <div className="p-4 rounded-xl bg-green-500/10 text-green-400">
@@ -113,7 +108,7 @@ function ProjectDetails() {
 
     {
       title: "Spent",
-      value: formatCurrency(project.spent),
+      value: formatCurrency(project.budgetSpent),
       subtitle: `${budgetPercent}% used`,
       icon: (
         <div className="p-4 rounded-xl bg-red-500/10 text-red-400">
@@ -155,7 +150,7 @@ function ProjectDetails() {
         </div>
       </div>
       {/* top cards */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {statsCards.map((card, index) => (
           <Card
             key={index}
