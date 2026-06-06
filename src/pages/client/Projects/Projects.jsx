@@ -59,6 +59,7 @@ function Projects() {
       />
     );
   }
+
   return (
     <section>
       <div className="flex items-center justify-between my-5">
@@ -158,7 +159,7 @@ function Projects() {
           </Card>
         ))}
       </div>
-      {projects.length > 0 && (
+      {projects.length >= 8 && (
         <Card className="w-full sticky bottom-0 z-50 glass-strong text-primary shadow-purple pl-3 pr-1 py-4 ">
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <p className="text-sm text-text-secondary">

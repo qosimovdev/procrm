@@ -123,9 +123,9 @@ function WorkCard({
                     setForm((prev) => ({ ...prev, role: value }))
                   }
                   options={[
-                    { label: "Admin", value: "Admin" },
-                    { label: "Manager", value: "Manager" },
-                    { label: "Developer", value: "Developer" },
+                    { label: "Admin", value: "ADMIN" },
+                    { label: "Manager", value: "MANAGER" },
+                    { label: "Developer", value: "DEVELOPER" },
                   ]}
                 />
                 <p className="text-sm text-muted-foreground mt-2 mb-4">

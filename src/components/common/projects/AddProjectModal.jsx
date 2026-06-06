@@ -68,6 +68,30 @@ export function AddProjectModal({ open, onOpenChange }) {
       toast.error("Client name is required");
       return;
     }
+    if (formData.budget && isNaN(formData.budget)) {
+      toast.error("Budget must be a number");
+      return;
+    }
+    if (!formData.startDate) {
+      toast.error("Start date is required");
+      return;
+    }
+    if (!formData.deadline) {
+      toast.error("Deadline is required");
+      return;
+    }
+    if (
+      formData.startDate &&
+      formData.deadline &&
+      formData.startDate > formData.deadline
+    ) {
+      toast.error("Start date cannot be after deadline");
+      return;
+    }
+    if (!formData.category) {
+      toast.error("Category is required");
+      return;
+    }
     const newProject = {
       projectName: formData.projectName,
       client: formData.client,

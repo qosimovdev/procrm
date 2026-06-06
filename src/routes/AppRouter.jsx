@@ -8,8 +8,7 @@ import PrivateLayout from "@/layout/PrivateLayout";
 import WorkInformationSetting from "@/pages/client/Settings/WorkInformationSetting";
 import SecuritySetting from "@/pages/client/Settings/SecuritySetting";
 import ActivitySetting from "@/pages/client/Settings/ActivitySetting";
-import { AddProjectModal } from "@/components/common/projects/AddProjectModal";
-
+import NotFound from "@/pages/notFound/NotFound";
 const Dashboard = lazy(() => import("../pages/client/Dashboard/Dashboard"));
 const Projects = lazy(() => import("../pages/client/Projects/Projects"));
 const ProjectDetails = lazy(
@@ -26,11 +25,7 @@ const SettingLayout = lazy(
   () => import("../pages/client/Settings/SettingLayout"),
 );
 
-import { useModalStore } from "@/stores/modalStore";
-import AddMemberModal from "@/components/common/Team/AddMemberModal";
-
 export default function AppRouter() {
-  const { modalType, closeModal } = useModalStore();
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
@@ -62,16 +57,8 @@ export default function AppRouter() {
         </Route>
 
         {/* 404 */}
-        <Route path="*" element={<div>404 Not Found</div>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      <AddProjectModal
-        open={modalType === "create-project"}
-        onOpenChange={closeModal}
-      />
-      <AddMemberModal
-        open={modalType === "invite-member"}
-        onOpenChange={closeModal}
-      />
     </Suspense>
   );
 }
