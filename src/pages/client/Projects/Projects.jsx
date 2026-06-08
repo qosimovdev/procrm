@@ -10,7 +10,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import ProgressLine, { ProgressCircle } from "@/components/ui/Progress";
-import { Plus, SquareCheckIcon, CalendarDays, FolderCode } from "lucide-react";
+import {
+  Plus,
+  SquareCheckIcon,
+  CalendarDays,
+  FolderCode,
+  Users,
+} from "lucide-react";
 import { AvatarGroups } from "../../../components/layout/Avatar/AvatarGroup";
 import { PaginationDemo } from "@/components/layout/Pagination/Pagination";
 import { useNavigate } from "react-router-dom";
@@ -71,7 +77,7 @@ function Projects() {
         </div>
         <Button
           variant="default"
-          className="btn-primary py-6 px-2 text-lg rounded-xl"
+          className="btn-primary py-5 px-2 text-lg rounded-xl"
           onClick={() => openModal("create-project")}
         >
           <Plus className=" size-5" /> New Project
@@ -126,12 +132,12 @@ function Projects() {
 
               {/* members, tasks, duedate */}
               <div className="flex items-center justify-between gap-1 text-base text-text-secondary">
-                {/* <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1">
                   <span>
                     <Users size={18} />
                   </span>
-                  <p>{project.teamMembers.length} Members</p>
-                </div> */}
+                  <p>{project.members.length} Members</p>
+                </div>
                 <div className="flex items-top gap-1">
                   <span>
                     <SquareCheckIcon size={20} />

@@ -1,3 +1,5 @@
+import { ChartSpline, TrendingUp } from "lucide-react";
+
 function ProgressLine({ progress, bgColor }) {
   return (
     <div className="space-y-2">
@@ -34,7 +36,7 @@ export const ProgressCircle = ({ progress, bgColor }) => {
     >
       {/* Inner circle */}
       <div className="w-20 h-20 rounded-full bg-[#0f172a] flex items-center justify-center">
-        <h3 className="text-white font-semibold text-lg">{progress}%</h3>
+        <TrendingUp style={{ color: bgColor || "#7F56D9" }} size={30} />
       </div>
     </div>
   );
