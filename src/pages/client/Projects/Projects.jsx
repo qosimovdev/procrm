@@ -87,7 +87,7 @@ function Projects() {
         {currentProject.map((project) => (
           <Card
             key={project.id}
-            className="w-full glass-strong hover:border-purple-500/30 transition-all text-primary shadow-purple flex flex-col justify-between"
+            className="w-full min-h-96 glass-strong hover:border-purple-500/30 transition-all text-primary shadow-purple flex flex-col justify-between"
           >
             <CardHeader>
               {/* Top badges */}
@@ -111,9 +111,9 @@ function Projects() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <CardDescription className="text-sm text-text-secondary ">
-                {project.description}
+            <CardContent className="space-y-3 flex-1 flex flex-col">
+              <CardDescription className="text-sm text-text-secondary min-h-12">
+                <p className="line-clamp-2">{project.description}</p>
               </CardDescription>
               {/* Tags */}
               <div className="flex flex-wrap gap-2">
@@ -156,7 +156,7 @@ function Projects() {
               <AvatarGroups members={project.members} />
               {/* Button */}
               <Button
-                className="w-full p-4 btn-primary rounded-xl mt-2 opacity-10 hover:opacity-100"
+                className="w-full p-4 btn-primary rounded-xl mt-auto opacity-10 hover:opacity-100"
                 onClick={() => navigate(`/projects/${project.id}`)}
               >
                 View Details

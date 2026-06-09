@@ -56,8 +56,7 @@ function WorkCard({
               <div>
                 <FieldLabel className={labelStyle}>Department</FieldLabel>
                 <CustomSelect
-                  value={form.department}
-                  defaultValue={form.department}
+                  value={form?.department || ""}
                   disabled={!isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, department: value }))
@@ -78,7 +77,7 @@ function WorkCard({
                 <FieldLabel className={labelStyle}>Position</FieldLabel>
                 <CustomSelect
                   placeholder="Select your position"
-                  value={form.position}
+                  value={form?.position || ""}
                   disabled={!isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, position: value }))
@@ -117,7 +116,7 @@ function WorkCard({
                 <FieldLabel className={labelStyle}>Role</FieldLabel>
                 <CustomSelect
                   placeholder="Select your role"
-                  value={form.role}
+                  value={form?.role || ""}
                   disabled={!isAdmin}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, role: value }))
@@ -137,7 +136,7 @@ function WorkCard({
                 <FieldLabel className={labelStyle}>Status</FieldLabel>
                 <CustomSelect
                   placeholder="Select your status"
-                  value={form.status}
+                  value={form?.status || ""}
                   disabled={!isAdmin}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, status: value }))

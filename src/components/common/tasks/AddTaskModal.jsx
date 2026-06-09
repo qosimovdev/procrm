@@ -2,21 +2,18 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { useCreateTask } from "@/hooks/tasks/useCreateTask";
 import { useGetUsers } from "@/hooks/useGetUser";
 import { useState } from "react";
+import { CustomSelect } from "../projects/ProjectSelect";
+import { DatePicker } from "@/components/ui/DatePicker";
 
 function AddTaskModal({ open, onOpenChange, projectId }) {
   const { mutate: createTask, isPending } = useCreateTask();
@@ -55,6 +52,7 @@ function AddTaskModal({ open, onOpenChange, projectId }) {
       deadline: formData.deadline,
       assignedTo: formData.assignedTo,
     };
+    console.log(formData);
     console.log("projectId:", projectId);
     console.log("task:", newTask);
     createTask(
@@ -74,110 +72,120 @@ function AddTaskModal({ open, onOpenChange, projectId }) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogHeader>
-        <DialogTitle>Add Task</DialogTitle>
-      </DialogHeader>
-      <DialogContent className="glass-strong text-text-primary">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="title">Title</Label>
-              <Input
-                id="title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="description">Description</Label>
-              <Input
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="status">Status</Label>
-              <Select
-                id="status"
-                name="status"
+      <DialogContent className="glass-strong text-text-primary sm:max-w-[600px]">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold">Add Task</DialogTitle>
+          <DialogDescription>
+            Create a new task for this project and manage its workflow.
+          </DialogDescription>
+        </DialogHeader>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-2">
+            <Label htmlFor="title" className="text-base">
+              Title
+            </Label>
+            <Input
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="Task title..."
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="description" className="text-base">
+              Description
+            </Label>
+            <Textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Describe the task..."
+              rows={4}
+              className="glass-strong"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-base">Status</Label>
+              <CustomSelect
+                label="Status"
+                placeholder="Select status"
                 value={formData.status}
-                onValueChange={(value) => handleSelectChange("status", value)}
-                className="col-span-3"
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="TODO">TODO</SelectItem>
-                  <SelectItem value="IN_PROGRESS">IN_PROGRESS</SelectItem>
-                  <SelectItem value="DONE">DONE</SelectItem>
-                </SelectContent>
-              </Select>
+                onChange={(value) => handleSelectChange("status", value)}
+                options={[
+                  { label: "To Do", value: "TODO" },
+                  { label: "In Progress", value: "IN_PROGRESS" },
+                  { label: "Done", value: "DONE" },
+                ]}
+              />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="priority">Priority</Label>
-              <Select
-                id="priority"
-                name="priority"
+
+            <div className="space-y-2">
+              <Label className="text-base">Priority</Label>
+              <CustomSelect
+                label="Priority"
+                placeholder="Select priority"
                 value={formData.priority}
-                onValueChange={(value) => handleSelectChange("priority", value)}
-                className="col-span-3"
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select priority" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="LOW">LOW</SelectItem>
-                  <SelectItem value="MEDIUM">MEDIUM</SelectItem>
-                  <SelectItem value="HIGH">HIGH</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label>Assigned To</Label>
-
-              <Select
-                value={formData.assignedTo?.toString()}
-                onValueChange={(value) =>
-                  handleSelectChange("assignedTo", Number(value))
-                }
-              >
-                <SelectTrigger className="col-span-3">
-                  <SelectValue placeholder="Select user" />
-                </SelectTrigger>
-
-                <SelectContent>
-                  {users.map((user) => (
-                    <SelectItem key={user.id} value={user.id.toString()}>
-                      {user.fullName}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="deadline">Deadline</Label>
-              <Input
-                id="deadline"
-                name="deadline"
-                type="date"
-                value={formData.deadline}
-                onChange={handleChange}
-                className="col-span-3"
+                onChange={(value) => handleSelectChange("priority", value)}
+                options={[
+                  { label: "Low", value: "LOW" },
+                  { label: "Medium", value: "MEDIUM" },
+                  { label: "High", value: "HIGH" },
+                ]}
               />
             </div>
           </div>
-        </form>
-        <div>
-          <Button onClick={handleSubmit} disabled={isPending}>
+
+          <div className="space-y-2">
+            <Label className="text-base">Assigned To</Label>
+            <CustomSelect
+              label="Assigned To"
+              placeholder="Select team member"
+              value={formData.assignedTo?.toString()}
+              onChange={(value) =>
+                handleSelectChange("assignedTo", Number(value))
+              }
+              options={users.map((user) => ({
+                label: user.fullName,
+                value: user.id.toString(),
+              }))}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="deadline">Deadline</Label>
+            <DatePicker
+              value={formData.deadline}
+              onChange={(date) =>
+                setFormData({
+                  ...formData,
+                  deadline: date,
+                })
+              }
+              placeholder="Select deadline"
+            />
+            {/* <Input
+              id="deadline"
+              name="deadline"
+              type="date"
+              value={formData.deadline}
+              onChange={handleChange}
+            /> */}
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full btn-primary p-6 text-base rounded-xl"
+            disabled={isPending}
+          >
             {isPending ? "Creating..." : "Create Task"}
           </Button>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );

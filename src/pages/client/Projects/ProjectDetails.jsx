@@ -20,6 +20,8 @@ import { useProject } from "../../../hooks/projects/useProject";
 import { Button } from "@/components/ui/button";
 import { useModalStore } from "@/stores/modalStore";
 import AddTaskModal from "@/components/common/tasks/AddTaskModal";
+import ReadMore from "@/components/layout/Readmore/ReadMore";
+import { FieldSeparator } from "@/components/ui/field";
 
 function ProjectDetails() {
   const navigate = useNavigate();
@@ -197,7 +199,7 @@ function ProjectDetails() {
         <CardContent className="p-6">
           <div className="flex flex-col items-start gap-8 xl:flex-row xl:items-center xl:justify-between">
             <div className="flex flex-col gap-6 lg:flex-row w-full">
-              <div className="h-52 w-full max-w-xs overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600">
+              <div className="h-56 w-full max-w-xs overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600">
                 {project.thumbnail ? (
                   <img
                     src={project.thumbnail}
@@ -219,9 +221,12 @@ function ProjectDetails() {
                 <h1 className="text-4xl text-text-primary font-bold">
                   {project.projectName}
                 </h1>
-                <p className="mt-2 max-w-3xl text-text-secondary">
+                <div className="mt-2 max-w-3xl text-text-secondary">
+                  <ReadMore text={project.description} />
+                </div>
+                {/* <p className="mt-2 max-w-3xl text-text-secondary line-clamp-3">
                   {project.description}
-                </p>
+                </p> */}
 
                 {/* Badges */}
                 <div className="mt-3 grid grid-cols-2 xl:grid-cols-4 gap-4 w-fit">
@@ -312,7 +317,10 @@ function ProjectDetails() {
             <h3 className="text-text-primary text-2xl font-semibold">
               About Project
             </h3>
-            <p className="text-text-secondary text-lg">{project.description}</p>
+            <FieldSeparator className="my-2" />
+            <p className="text-text-secondary text-lg max-h-50 overflow-y-auto">
+              {project.description}
+            </p>
             <div className="mt-6 space-y-4">
               <div className="flex justify-between items-center">
                 <p className="flex items-center gap-2 text-base text-text-secondary">
@@ -323,7 +331,7 @@ function ProjectDetails() {
                   {project.client}
                 </Badge>
               </div>
-
+              <FieldSeparator className="mb-2" />
               <div className="flex justify-between items-center">
                 <p className="flex items-center gap-2 text-base text-text-secondary">
                   <Flag className="size-4" />
@@ -331,6 +339,7 @@ function ProjectDetails() {
                 </p>
                 <ProjectBadge type="priority" value={project.priority} />
               </div>
+              <FieldSeparator className="mb-2" />
 
               <div className="flex justify-between items-center">
                 <p className="flex items-center gap-2 text-base text-text-secondary">
@@ -339,6 +348,7 @@ function ProjectDetails() {
                 </p>
                 <ProjectBadge type="status" value={project.status} />
               </div>
+              <FieldSeparator className="mb-2" />
 
               <div className="flex justify-between items-center">
                 <p className="flex items-center gap-2 text-base text-text-secondary">
@@ -356,11 +366,12 @@ function ProjectDetails() {
         {/* MEMBERS */}
         <Card className="glass-strong">
           <CardContent className="p-4">
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-2 flex items-center justify-between">
               <h3 className="text-2xl text-text-primary font-semibold">
                 Team Members ({project.members?.length || 0})
               </h3>
             </div>
+            <FieldSeparator className="my-2" />
 
             <div className="space-y-3 max-h-80 overflow-y-auto">
               {project.members?.map((member) => (
@@ -390,11 +401,12 @@ function ProjectDetails() {
         {/* TASKS */}
         <Card className="glass-strong">
           <CardContent className="p-4">
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-2 flex items-center justify-between">
               <h3 className="text-2xl font-semibold text-text-primary">
                 Recent Tasks ({project.tasks.length || 0})
               </h3>
             </div>
+            <FieldSeparator className="my-2" />
 
             {project.tasks?.length ? (
               <div className="space-y-3 max-h-80 overflow-y-auto">
@@ -466,13 +478,12 @@ function ProjectDetails() {
             </div>
           </div>
         </CardContent>
+        <AddTaskModal
+          open={modalType === "create-task"}
+          onOpenChange={closeModal}
+          projectId={id}
+        />
       </Card>
-
-      <AddTaskModal
-        open={modalType === "create-task"}
-        onOpenChange={closeModal}
-        projectId={id}
-      />
     </section>
   );
 }

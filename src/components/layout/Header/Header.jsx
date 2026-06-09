@@ -30,6 +30,8 @@ function Header() {
     queryClient.clear();
     navigate("/auth/login");
   };
+  console.log(user);
+
   const avatarSrc = user?.avatar
     ? `${import.meta.env.VITE_SERVER_URL}${user.avatar}`
     : "/default-avatar.png";
