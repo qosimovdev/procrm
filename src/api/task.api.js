@@ -7,16 +7,20 @@ export const createTask = async ({ data, projectId }) => {
     return res.data;
 };
 
-export const getTasks = async (projectId) => {
+export const getProjectTasks = async (projectId) => {
     const res = await api.get(
         `/tasks/projects/${projectId}`
     );
     return res.data;
 };
 
+export const getTasks = async () => {
+    const res = await api.get("/tasks");
+    return res.data;
+};
+
 export const getTask = async (id) => {
     const res = await api.get(`/tasks/${id}`);
-
     return res.data;
 };
 
@@ -32,8 +36,7 @@ export const updateTask = async ({ id, data, }) => {
     return res.data;
 };
 
-export const updateTaskStatus = async ({ id, status,
-}) => {
+export const updateTaskStatus = async ({ id, status, }) => {
     const res = await api.patch(
         `/tasks/${id}/status`, { status }
     );

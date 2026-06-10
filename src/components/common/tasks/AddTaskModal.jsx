@@ -22,7 +22,6 @@ function AddTaskModal({ open, onOpenChange, projectId }) {
   const initialState = {
     title: "",
     description: "",
-    status: "TODO",
     priority: "MEDIUM",
     deadline: "",
     createdBy: null,
@@ -47,7 +46,7 @@ function AddTaskModal({ open, onOpenChange, projectId }) {
     const newTask = {
       title: formData.title,
       description: formData.description,
-      status: formData.status,
+      status: "TODO",
       priority: formData.priority,
       deadline: formData.deadline,
       assignedTo: formData.assignedTo,
@@ -109,8 +108,7 @@ function AddTaskModal({ open, onOpenChange, projectId }) {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+          {/* <div className="space-y-2">
               <Label className="text-base">Status</Label>
               <CustomSelect
                 label="Status"
@@ -123,22 +121,21 @@ function AddTaskModal({ open, onOpenChange, projectId }) {
                   { label: "Done", value: "DONE" },
                 ]}
               />
-            </div>
+            </div> */}
 
-            <div className="space-y-2">
-              <Label className="text-base">Priority</Label>
-              <CustomSelect
-                label="Priority"
-                placeholder="Select priority"
-                value={formData.priority}
-                onChange={(value) => handleSelectChange("priority", value)}
-                options={[
-                  { label: "Low", value: "LOW" },
-                  { label: "Medium", value: "MEDIUM" },
-                  { label: "High", value: "HIGH" },
-                ]}
-              />
-            </div>
+          <div className="space-y-2">
+            <Label className="text-base">Priority</Label>
+            <CustomSelect
+              label="Priority"
+              placeholder="Select priority"
+              value={formData.priority}
+              onChange={(value) => handleSelectChange("priority", value)}
+              options={[
+                { label: "Low", value: "LOW" },
+                { label: "Medium", value: "MEDIUM" },
+                { label: "High", value: "HIGH" },
+              ]}
+            />
           </div>
 
           <div className="space-y-2">
