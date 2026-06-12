@@ -11,8 +11,12 @@ function KanbanColumn({ title, tasks }) {
   const { setNodeRef } = useDroppable({
     id: statusMap[title],
   });
+
   return (
-    <Card ref={setNodeRef} className="h-fit min-h-[500px] glass shadow-purple">
+    <Card
+      ref={setNodeRef}
+      className="h-fit max-h-[500px] overflow-y-auto glass shadow-purple"
+    >
       <CardContent className="p-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">

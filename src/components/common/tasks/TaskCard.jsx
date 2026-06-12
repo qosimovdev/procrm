@@ -1,15 +1,19 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { CalendarDays } from "lucide-react";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import React from "react";
+import { ProjectBadge } from "../projects/ProjectBadge";
+import { cn } from "@/lib/utils";
 function TaskCard({ task }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });
   const style = {
     transform: CSS.Translate.toString(transform),
+    transition: transform ? "none" : "transform 200ms ease",
   };
+  const isOverdue = task.deadline && new Date(task.deadline) < new Date();
   return (
     <Card
       ref={setNodeRef}
@@ -26,11 +30,18 @@ function TaskCard({ task }) {
           {task.description}
         </p>
         <div className="flex items-center justify-between mt-4">
-          <Badge variant={task.priority === "HIGH" ? "destructive" : "outline"}>
+          <ProjectBadge type="priority" value={task.priority} />
+
+          {/* <Badge variant={task.priority === "HIGH" ? "destructive" : "outline"}>
             {task.priority}
-          </Badge>
+          </Badge> */}
           {task.deadline && (
-            <div className="flex items-center gap-1 text-sm text-text-secondary">
+            <div
+              className={cn(
+                "flex items-center gap-1 text-sm",
+                isOverdue ? "text-red-400" : "text-text-secondary",
+              )}
+            >
               <CalendarDays className="size-4" />
               {new Date(task.deadline).toLocaleDateString("uz-UZ")}
             </div>
@@ -41,4 +52,4 @@ function TaskCard({ task }) {
   );
 }
 
-export default TaskCard;
+export default React.memo(TaskCard);

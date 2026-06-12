@@ -51,6 +51,21 @@ const styles = {
         "bg-green-500/10 text-green-400 border border-green-500/20 shadow-[0_0_20px_rgba(34,197,94,0.25)]",
       icon: "text-green-400",
     },
+    HIGH: {
+      badge:
+        "bg-red-500/10 text-red-400 border border-red-500/20 shadow-[0_0_20px_rgba(239,68,68,0.25)]",
+      icon: "text-red-400",
+    },
+    MEDIUM: {
+      badge:
+        "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 shadow-[0_0_20px_rgba(234,179,8,0.25)]",
+      icon: "text-yellow-400",
+    },
+    LOW: {
+      badge:
+        "bg-green-500/10 text-green-400 border border-green-500/20 shadow-[0_0_20px_rgba(34,197,94,0.25)]",
+      icon: "text-green-400",
+    },
   },
 };
 

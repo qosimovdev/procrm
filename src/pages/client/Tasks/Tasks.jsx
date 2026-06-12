@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTasks } from "@/hooks/tasks/useTasks";
-
 import { Input } from "@/components/ui/input";
 import {
   CircleCheckBig,
@@ -9,25 +8,27 @@ import {
   ListTodo,
   Search,
 } from "lucide-react";
-
 import StatCard from "@/components/common/tasks/StatCard";
 import KanbanColumn from "@/components/common/tasks/KanbanColumn";
 import { CustomSelect } from "@/components/common/projects/ProjectSelect";
-import { DndContext, closestCorners } from "@dnd-kit/core";
+import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
 import { useUpdateTaskStatus } from "@/hooks/tasks/useUpdateTaskStatus";
+import TaskCard from "@/components/common/tasks/TaskCard";
+
 function Tasks() {
   const { data, isLoading } = useTasks();
   const { mutate: updateTaskStatus } = useUpdateTaskStatus();
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("ALL");
   const [boardTasks, setBoardTasks] = useState([]);
+  const [activeTask, setActiveTask] = useState(null);
 
   useEffect(() => {
     if (data?.tasks) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setBoardTasks(data.tasks);
     }
-  }, [data]);
+  }, [data?.tasks]);
 
   const tasks = data?.tasks ?? [];
   const filteredTasks = useMemo(() => {
@@ -109,7 +110,18 @@ function Tasks() {
           />
         </div>
       </div>
-      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+      <DndContext
+        collisionDetection={closestCorners}
+        onDragStart={({ active }) => {
+          const task = boardTasks.find((t) => t.id === active.id);
+          setActiveTask(task);
+        }}
+        onDragEnd={(event) => {
+          handleDragEnd(event);
+          setActiveTask(null);
+        }}
+        onDragCancel={() => setActiveTask(null)}
+      >
         <div className="grid gap-5 lg:grid-cols-3">
           <KanbanColumn id="TODO" title="Todo" tasks={todoTasks} />
           <KanbanColumn
@@ -119,6 +131,9 @@ function Tasks() {
           />
           <KanbanColumn id="DONE" title="Done" tasks={doneTasks} />
         </div>
+        <DragOverlay>
+          {activeTask ? <TaskCard task={activeTask} /> : null}
+        </DragOverlay>
       </DndContext>
     </section>
   );
