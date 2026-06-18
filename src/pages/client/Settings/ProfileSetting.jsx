@@ -134,6 +134,7 @@ function ProfileSetting() {
           isPending={isPending}
           setUser={setUser}
           labelStyle={labelStyle}
+          user={user}
         />
         <SocialCard
           form={form}

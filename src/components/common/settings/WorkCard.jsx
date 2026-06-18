@@ -27,7 +27,9 @@ function WorkCard({
   const isChanged = useMemo(() => {
     return JSON.stringify(form) !== JSON.stringify(original);
   }, [form, original]);
-  const isAdmin = user?.role === "Admin";
+  const isAdmin = user?.role === "ADMIN";
+  console.log(user);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     updateProfile(form, {
@@ -117,7 +119,7 @@ function WorkCard({
                 <CustomSelect
                   placeholder="Select your role"
                   value={form?.role || ""}
-                  disabled={!isAdmin}
+                  disabled={!isAdmin || !isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, role: value }))
                   }
@@ -137,7 +139,7 @@ function WorkCard({
                 <CustomSelect
                   placeholder="Select your status"
                   value={form?.status || ""}
-                  disabled={!isAdmin}
+                  disabled={!isAdmin || !isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, status: value }))
                   }
