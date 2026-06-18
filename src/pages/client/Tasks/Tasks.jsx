@@ -5,6 +5,7 @@ import {
   CircleCheckBig,
   ClipboardList,
   Clock3,
+  FolderCode,
   ListTodo,
   Search,
 } from "lucide-react";
@@ -14,7 +15,8 @@ import { CustomSelect } from "@/components/common/projects/ProjectSelect";
 import { DndContext, DragOverlay, closestCorners } from "@dnd-kit/core";
 import { useUpdateTaskStatus } from "@/hooks/tasks/useUpdateTaskStatus";
 import TaskCard from "@/components/common/tasks/TaskCard";
-
+import { EmptyCard } from "@/components/layout/Empty/Empty";
+import { useModalStore } from "@/stores/modalStore";
 function Tasks() {
   const { data, isLoading } = useTasks();
   const { mutate: updateTaskStatus } = useUpdateTaskStatus();
@@ -22,6 +24,7 @@ function Tasks() {
   const [status, setStatus] = useState("ALL");
   const [boardTasks, setBoardTasks] = useState([]);
   const [activeTask, setActiveTask] = useState(null);
+  const { openModal } = useModalStore();
 
   useEffect(() => {
     if (data?.tasks) {
@@ -66,6 +69,18 @@ function Tasks() {
       },
     );
   };
+
+  if (tasks.length === 0) {
+    return (
+      <EmptyCard
+        icon={<FolderCode />}
+        title="No Tasks Yet"
+        description="Create your first project to start tracking tasks, budgets, deadlines, and team progress."
+        actionText="Create Task"
+        onAction={() => openModal("create-task")}
+      />
+    );
+  }
   return (
     <section className="space-y-6">
       <div className="flex items-center justify-between my-5">

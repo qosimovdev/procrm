@@ -24,12 +24,15 @@ import { Card, CardTitle } from "@/components/ui/card";
 import { useDeleteUser } from "@/hooks/useDeleteUser";
 import { Alert } from "@/components/layout/Alert/Alert";
 import { EmptyCard } from "@/components/layout/Empty/Empty";
+import useAuthStore from "@/stores/authStore";
 
 function Developers() {
   const [page, setPage] = useState(1);
   const { openModal } = useModalStore();
   const { mutate: deleteUser } = useDeleteUser();
   const { data, isLoading, error } = useGetUsers();
+  const authUser = useAuthStore((state) => state.user);
+
   const users = data?.users ?? [];
   useEffect(() => {
     if (error) {
@@ -56,7 +59,6 @@ function Developers() {
       />
     );
   }
-
   return (
     <section>
       <div className="flex items-center justify-between my-5">
@@ -123,53 +125,65 @@ function Developers() {
             </TableHeader>
 
             <TableBody>
-              {currentMembers.map((user) => (
-                <TableRow
-                  className="hover:bg-white/5 transition text-base text-text-secondary"
-                  key={user.id}
-                >
-                  <TableCell>{user.fullName}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.role}</TableCell>
-                  <TableCell>{user.department || "-"}</TableCell>
-                  <TableCell>{user.position || "-"}</TableCell>
-                  <TableCell>{user.status}</TableCell>
-                  <TableCell>
-                    {" "}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="size-8 rounded-xl hover:bg-white/10 hover:glass hover:shadow-purple hover:text-text-primary transition-all duration-300"
+              {currentMembers.map((user) => {
+                const isMe = user.id === authUser?.id;
+
+                return (
+                  <TableRow
+                    key={user.id}
+                    className="hover:bg-white/5 transition text-base text-text-secondary"
+                  >
+                    <TableCell>
+                      {user.fullName} {isMe && "(You)"}
+                    </TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.role}</TableCell>
+                    <TableCell>{user.department || "-"}</TableCell>
+                    <TableCell>{user.position || "-"}</TableCell>
+                    <TableCell>{user.status}</TableCell>
+
+                    <TableCell>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="size-8 rounded-xl hover:bg-white/10 hover:glass hover:shadow-purple hover:text-text-primary transition-all duration-300"
+                          >
+                            <MoreHorizontalIcon className="size-5" />
+                          </Button>
+                        </DropdownMenuTrigger>
+
+                        <DropdownMenuContent
+                          align="end"
+                          className="glass text-text-primary"
                         >
-                          <MoreHorizontalIcon className="size-5" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        align="end"
-                        className="glass text-text-primary "
-                      >
-                        <DropdownMenuItem className="hover:bg-gradient-dark cursor-pointer">
-                          Edit
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-gradient-dark cursor-pointer">
-                          View Details
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <Alert
-                          alerTitle="Delete Member?"
-                          alertDesc="Are you sure?"
-                          firstBtnText="Delete Member"
-                          btnText="Delete"
-                          handler={() => handleDelete(user.id)}
-                          icon={<Trash2Icon />}
-                        />
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
+                          <DropdownMenuItem className="hover:bg-gradient-dark cursor-pointer">
+                            Edit
+                          </DropdownMenuItem>
+
+                          <DropdownMenuItem className="hover:bg-gradient-dark cursor-pointer">
+                            View Details
+                          </DropdownMenuItem>
+
+                          <DropdownMenuSeparator />
+
+                          {!isMe && (
+                            <Alert
+                              alerTitle="Delete Member?"
+                              alertDesc="Are you sure?"
+                              firstBtnText="Delete Member"
+                              btnText="Delete"
+                              handler={() => handleDelete(user.id)}
+                              icon={<Trash2Icon />}
+                            />
+                          )}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </Card>

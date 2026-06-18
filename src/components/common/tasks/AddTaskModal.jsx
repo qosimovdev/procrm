@@ -51,8 +51,6 @@ function AddTaskModal({ open, onOpenChange, projectId }) {
       deadline: formData.deadline,
       assignedTo: formData.assignedTo,
     };
-    console.log(formData);
-    console.log("projectId:", projectId);
     console.log("task:", newTask);
     createTask(
       {
