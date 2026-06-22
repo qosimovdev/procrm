@@ -25,6 +25,7 @@ import { useDeleteUser } from "@/hooks/useDeleteUser";
 import { Alert } from "@/components/layout/Alert/Alert";
 import { EmptyCard } from "@/components/layout/Empty/Empty";
 import useAuthStore from "@/stores/authStore";
+import { Badge } from "@/components/ui/badge";
 
 function Developers() {
   const [page, setPage] = useState(1);
@@ -127,14 +128,14 @@ function Developers() {
             <TableBody>
               {currentMembers.map((user) => {
                 const isMe = user.id === authUser?.id;
-
                 return (
                   <TableRow
                     key={user.id}
                     className="hover:bg-white/5 transition text-base text-text-secondary"
                   >
-                    <TableCell>
-                      {user.fullName} {isMe && "(You)"}
+                    <TableCell className="flex gap-2 mt-1">
+                      <span>{user.fullName}</span>
+                      {isMe && <Badge>You</Badge>}
                     </TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>{user.role}</TableCell>
@@ -148,7 +149,7 @@ function Developers() {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="size-8 rounded-xl hover:bg-white/10 hover:glass hover:shadow-purple hover:text-text-primary transition-all duration-300"
+                            className="size-8 rounded-xl hover:bg-white/10 hover:glass hover:shadow-purple hover:text-text-primary transition-all duration-300 cursor-pointer"
                           >
                             <MoreHorizontalIcon className="size-5" />
                           </Button>
