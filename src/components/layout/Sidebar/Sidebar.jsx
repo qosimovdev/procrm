@@ -22,7 +22,7 @@ function Sidebar() {
         ProCRM
       </h1>
       <h1 className="block md:hidden text-gradient text-2xl font-bold mb-8">
-        PC
+        <img src="/favicon.svg" alt="logo" />
       </h1>
       <ul className="space-y-3">
         {links.map((link) => (

@@ -41,7 +41,8 @@ function Login() {
         <div className="relative z-10 flex flex-col justify-between p-14 w-full">
           {/* logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-primary" />
+            {/* <div className="w-10 h-10 rounded-xl bg-gradient-primary" /> */}
+            <img src="/favicon.svg" alt="Logo" />
             <h1 className="text-2xl font-bold">PRO CRM</h1>
           </div>
           {/* content */}
