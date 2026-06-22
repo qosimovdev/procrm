@@ -3,7 +3,7 @@ import { Frown } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-6">
+    <div className="min-h-screen flex items-center justify-center bg px-6">
       <div className="text-center max-w-md">
         <div className="flex justify-center mb-6">
           <div className="p-4 rounded-full bg-muted">
@@ -13,7 +13,9 @@ export default function NotFound() {
 
         <h1 className="text-6xl font-bold text-primary mb-2">404</h1>
 
-        <h2 className="text-xl font-semibold mb-3">Page not found</h2>
+        <h2 className="text-xl text-text-primary font-semibold mb-3">
+          Page not found
+        </h2>
 
         <p className="text-muted-foreground mb-6">
           The page you are looking for doesn't exist or has been moved.

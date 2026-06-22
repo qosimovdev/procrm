@@ -1,34 +1,26 @@
-// import { useEffect } from "react";
-// import useAuthStore from "../stores/authStore";
-// import { useMe } from "./useGetUser";
-
-// export const useAuthInit = () => {
-//   const { data } = useMe();
-//   const login = useAuthStore((s) => s.login);
-//   useEffect(() => {
-//     if (!data) return;
-//     const token = localStorage.getItem("token");
-//     if (!token) return;
-//     login({
-//       user: data,
-//       token,
-//     });
-//   }, [data, login]);
-// };
 import { useEffect } from "react";
 import useAuthStore from "../stores/authStore";
 import { useMe } from "./useGetUser";
 
 export const useAuthInit = () => {
-  const { data } = useMe();
+  const { data, isLoading, isError } = useMe();
   const login = useAuthStore((s) => s.login);
+  const setInitializing = useAuthStore((s) => s.setInitializing);
   useEffect(() => {
-    if (!data) return;
     const token = localStorage.getItem("token");
-    if (!token) return;
-    login({
-      user: data,
-      token,
-    });
-  }, [data, login]);
+    if (!token) {
+      setInitializing(false);
+      return;
+    }
+    if (data) {
+      login({
+        user: data,
+        token,
+      });
+      setInitializing(false);
+    }
+    if (!isLoading && isError) {
+      setInitializing(false);
+    }
+  }, [data, isLoading, isError, login, setInitializing]);
 };

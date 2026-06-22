@@ -3,7 +3,7 @@ import { AddProjectModal } from "./components/common/projects/AddProjectModal";
 import AddMemberModal from "./components/common/Team/AddMemberModal";
 import { useModalStore } from "@/stores/modalStore";
 
-function AppModal({ id }) {
+function AppModal() {
   const { modalType, closeModal } = useModalStore();
 
   return (

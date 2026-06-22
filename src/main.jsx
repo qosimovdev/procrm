@@ -5,7 +5,10 @@ import "./assets/css/index.css";
 import "./assets/css/component.css";
 import App from "./App.jsx";
 const queryClient = new QueryClient();
-
+const loader = document.getElementById("initial-loader");
+if (loader) {
+  loader.remove();
+}
 createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>

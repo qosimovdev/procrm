@@ -28,7 +28,6 @@ function WorkCard({
     return JSON.stringify(form) !== JSON.stringify(original);
   }, [form, original]);
   const isAdmin = user?.role === "ADMIN";
-  console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +38,7 @@ function WorkCard({
       },
     });
   };
-
+  const safeValue = (val) => val || undefined;
   return (
     <Card>
       <CardHeader className="flex gap-4 items-start text-text-primary">
@@ -58,7 +57,8 @@ function WorkCard({
               <div>
                 <FieldLabel className={labelStyle}>Department</FieldLabel>
                 <CustomSelect
-                  value={form?.department || ""}
+                  key={`department-${form.department}`}
+                  value={safeValue(form.department)}
                   disabled={!isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, department: value }))
@@ -78,8 +78,9 @@ function WorkCard({
               <div>
                 <FieldLabel className={labelStyle}>Position</FieldLabel>
                 <CustomSelect
+                  key={`position-${form.position}`}
+                  value={safeValue(form.position)}
                   placeholder="Select your position"
-                  value={form?.position || ""}
                   disabled={!isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, position: value }))
@@ -117,8 +118,9 @@ function WorkCard({
               <div>
                 <FieldLabel className={labelStyle}>Role</FieldLabel>
                 <CustomSelect
+                  key={`role-${form.role}`}
+                  value={safeValue(form.role)}
                   placeholder="Select your role"
-                  value={form?.role || ""}
                   disabled={!isAdmin || !isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, role: value }))
@@ -137,8 +139,9 @@ function WorkCard({
               <div>
                 <FieldLabel className={labelStyle}>Status</FieldLabel>
                 <CustomSelect
+                  key={`status-${form.status}`}
+                  value={safeValue(form.status)}
                   placeholder="Select your status"
-                  value={form?.status || ""}
                   disabled={!isAdmin || !isEditing}
                   onChange={(value) =>
                     setForm((prev) => ({ ...prev, status: value }))

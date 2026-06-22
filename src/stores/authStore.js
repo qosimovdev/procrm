@@ -3,6 +3,8 @@ import { create } from "zustand";
 const useAuthStore = create((set) => ({
     user: null,
     token: localStorage.getItem("token") || null,
+    isInitializing: true,
+    setInitializing: (value) => set({ isInitializing: value }),
     login: (data) => {
         set({
             user: data.user,

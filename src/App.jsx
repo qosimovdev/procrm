@@ -1,8 +1,14 @@
 import { Toaster } from "sonner";
 import AppRouter from "./routes/AppRouter";
 import AppModal from "./AppModal";
+import useAuthStore from "./stores/authStore";
+import AppLoader from "./components/common/loaders/AppLoader";
+import { useAuthInit } from "./hooks/useAuthInit";
 
 function App() {
+  useAuthInit();
+  const isInitializing = useAuthStore((state) => state.isInitializing);
+  if (isInitializing) return <AppLoader />;
   return (
     <>
       <div className="">

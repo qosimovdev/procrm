@@ -10,9 +10,112 @@
     content="ProCRM, project management, task tracking, team collaboration, productivity, project planning, project tracking, project organization" />
   <meta name="author" content="Ibrohim Qosimov" />
   <title>procrm</title>
+  <style>
+    #initial-loader {
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      inset: 0;
+      background: #0b0b14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 99999;
+    }
+
+    .glow {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(80px);
+    }
+
+    .glow-1 {
+      width: 18rem;
+      height: 18rem;
+      background: rgba(124, 92, 255, 0.2);
+    }
+
+    .glow-2 {
+      width: 24rem;
+      height: 24rem;
+      background: rgba(139, 92, 246, 0.1);
+      top: 5rem;
+      right: 5rem;
+    }
+
+    .loader-card {
+      position: relative;
+      z-index: 10;
+      padding: 25px 55px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(30px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .loader-card h1 {
+      font-size: 38px;
+      font-weight: bold;
+      color: #a855f7;
+      margin-bottom: 20px;
+    }
+
+    .spinner-wrapper {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      margin: auto;
+    }
+
+    .spinner-bg {
+      width: 64px;
+      height: 64px;
+      border-radius: 9999px;
+      border: 4px solid rgba(124, 92, 255, 0.2);
+    }
+
+    .spinner {
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      border: 4px solid #a955f7ea;
+      border-top-color: transparent;
+      animation: spin 0.9s linear infinite;
+    }
+
+    .loader-card p {
+      margin-top: 20px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div id="initial-loader">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="loader-card">
+      <h1>ProCRM</h1>
+
+      <div class="spinner-wrapper">
+        <!-- <div class="spinner-bg"></div> -->
+        <div class="spinner"></div>
+      </div>
+
+      <p>Loading your workspace...</p>
+    </div>
+  </div>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
